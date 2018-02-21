@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#fdfdfd</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorfab">#e0e0e0</color>
+    <color name="textBadge">#c62828</color>
+    <color name="bottomBackground">#ffffff</color>
+    <color name="bottomItemSelected">#4caf50</color>
+    <color name="black_overlay">#0d0d0d</color>
+    <color name="func_1">#3f51b5</color>
+    <color name="func_2">#ffa635</color>
+    <color name="func_3">#81c784</color>
+    <color name="func_4">#ff6e40</color>
+    <color name="func_5">#d4e157</color>
+    <color name="func_6">#00bfa5</color>
+    <color name="func_7">#00b0ff</color>
+    <color name="func_8">#f57f17</color>
+    <color name="func_9">#9c27b0</color>
+    <color name="func_green">#64dd17</color>
+    <color name="notification_zone">#e0e0e0</color>
+</resources>

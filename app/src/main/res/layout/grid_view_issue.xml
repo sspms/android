@@ -1,0 +1,10 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gridview_issue_chart"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    android:layout_margin="16dp"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+</LinearLayout>
