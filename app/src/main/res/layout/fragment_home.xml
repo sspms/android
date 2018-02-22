@@ -127,16 +127,6 @@
                         android:textSize="8sp"
                         android:visibility="visible" />
                 </LinearLayout>
-
-                <!--<GridView-->
-                <!--android:id="@+id/gridview_msg"-->
-                <!--android:layout_width="48dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:columnWidth="48dp"-->
-                <!--android:numColumns="1"-->
-                <!--android:scrollbars="none"-->
-                <!--android:stretchMode="spacingWidthUniform"></GridView>-->
-                <!--</RelativeLayout>-->
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -144,6 +134,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -151,26 +142,37 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.shanshui.smartcommunity.android.NestedGridView
-                android:id="@+id/gridview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorPrimary"
-                android:columnWidth="60dp"
-                android:numColumns="5"
-                android:scrollbars="none"
-                android:stretchMode="spacingWidthUniform" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_func_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"/>
+
+                <LinearLayout
+                    android:id="@+id/viewpager_func_index"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="-16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/notification_zone"
                 android:orientation="vertical">
 
                 <android.support.v4.view.ViewPager
-                    android:id="@+id/viewPager"
+                    android:id="@+id/viewPager_notification"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
                     android:layout_gravity="center"

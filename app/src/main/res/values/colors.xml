@@ -6,7 +6,8 @@
     <color name="colorfab">#e0e0e0</color>
     <color name="textBadge">#c62828</color>
     <color name="bottomBackground">#ffffff</color>
-    <color name="bottomItemSelected">#4caf50</color>
+    <color name="bottomItemSelected">#388e3c</color>
+    <color name="itemNotSelected">#9e9e9e</color>
     <color name="black_overlay">#0d0d0d</color>
     <color name="func_1">#3f51b5</color>
     <color name="func_2">#ffa635</color>
@@ -18,5 +19,5 @@
     <color name="func_8">#f57f17</color>
     <color name="func_9">#9c27b0</color>
     <color name="func_green">#64dd17</color>
-    <color name="notification_zone">#e0e0e0</color>
+    <color name="notification_zone">#eeeeee</color>
 </resources>

@@ -1,15 +1,26 @@
 package com.shanshui.smartcommunity.android.util;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.shanshui.smartcommunity.android.R;
 
 /**
  * Created by I336253 on 2/20/2018.
  */
 
-public class DrawableHelper {
+public class ResourceHelper {
+
+    public static void setImageViewTint(Context context, ImageView imageView, int colorRes) {
+        imageView.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(context, colorRes)));
+    }
+
     public static void setTextViewDrawableColor(TextView textView, int color) {
         for (Drawable drawable : textView.getCompoundDrawables()) {
             if (drawable != null) {
@@ -33,5 +44,9 @@ public class DrawableHelper {
         } else {
             view.setBackgroundColor(color);
         }
+    }
+
+    public static int getInt(Context context, int resId) {
+        return context.getResources().getInteger(resId);
     }
 }

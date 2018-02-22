@@ -1,7 +1,7 @@
 package com.shanshui.smartcommunity.android;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -18,7 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +34,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.shanshui.smartcommunity.android.util.DrawableHelper;
+import com.shanshui.smartcommunity.android.util.ResourceHelper;
 import com.shanshui.smartcommunity.android.util.WindowHelper;
 import com.shanshui.smartcommunity.android.viewcard.CardItem;
 import com.shanshui.smartcommunity.android.viewcard.CardPagerAdapter;
@@ -61,13 +61,17 @@ public class HomeFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mName;
-    private NestedGridView gridView;
-    private List<Map<String, Object>> dataList;
+    private List<NestedGridView> gridView;
+    private List<Map<String, Object>> funcEntryPageOneData;
+    private List<Map<String, Object>> funcEntryPageTwoData;
     private GridViewColorAdaptor adapter;
+    private ViewPager funcPage;
+    private LinearLayout thumbLayout;
+    private ImageView[] thumbViews;
 
-    private ViewPager mViewPager;
-    private CardPagerAdapter mCardAdapter;
-    private ShadowTransformer mCardShadowTransformer;
+    private ViewPager view;
+    private CardPagerAdapter cardPagerAdapter;
+    private ShadowTransformer shadowTransformer;
     private CollapsingToolbarLayoutState state;
 
     private HorizontalBarChart propertyIssueChart;
@@ -111,7 +115,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         CoordinatorLayout view = (CoordinatorLayout) inflater.inflate(R.layout.fragment_home, container, false);
-        initFeatureEntries(inflater, view);
+        initFeaturePage(inflater, view);
+        //initFeatureEntries(inflater, view);
         initNotificationZone(view);
         initToolbar(view);
         initPropertyIssueChart(view);
@@ -119,72 +124,182 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void initFeatureEntries(LayoutInflater inflater, View view) {
-        gridView = (NestedGridView) view.findViewById(R.id.gridview);
-        //初始化数据
-        initData();
+    private void initFeaturePage(LayoutInflater inflater, View view) {
+        if (this.gridView == null) {
+            gridView = new ArrayList();
+            String[] from = {"img", "text"};
 
-        String[] from = {"img", "text"};
+            int[] to = {R.id.item_icon, R.id.item_text};
+            int colors[] = {R.color.func_1, R.color.func_2, R.color.func_3, R.color.func_4,
+                    R.color.func_5,
+                    R.color.func_6, R.color.func_7, R.color.func_8, R.color.func_9,
+                    R.color.bottomItemSelected};
+            funcPage = view.findViewById(R.id.viewpager_func_entry);
 
-        int[] to = {R.id.item_icon, R.id.item_text};
-        int colors[] = {R.color.func_1, R.color.func_2, R.color.func_3, R.color.func_4,
-                R.color.func_5,
-                R.color.func_6, R.color.func_7, R.color.func_8, R.color.func_9,
-                R.color.func_4,
-                R.color.func_green, R.color.func_1, R.color.func_3, R.color.func_5,
-                R.color.func_2};
-        adapter = new GridViewColorAdaptor(inflater, getContext(), dataList, R.layout.grid_view_item, from, to, colors);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            thumbLayout = view.findViewById(R.id.viewpager_func_index);
+            thumbViews = new ImageView[2];
+            for (int i = 0; i < 2; i++) {
+                ImageView imageView = new ImageView(getContext());
+                thumbViews[i] = imageView;
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        new ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                layoutParams.rightMargin = 3;
+                layoutParams.leftMargin = 3;
+                imageView.setImageResource(R.drawable.ic_whitedot);
+                if (0 == i) {
+                    ResourceHelper.setImageViewTint(getContext(), imageView, R.color.bottomItemSelected);
+                } else {
+                    ResourceHelper.setImageViewTint(getContext(), imageView, R.color.itemNotSelected);
+                }
+                thumbLayout.addView(imageView, layoutParams);
+
+                NestedGridView page = (NestedGridView) View.inflate(getContext(), R.layout.gridview_func_entry, null);//(NestedGridView) inflater.inflate(R.layout.gridview_func_entry, funcPage, true);
+
+                final GridViewColorAdaptor adaptor = new GridViewColorAdaptor(
+                        inflater,
+                        getContext(),
+                        initFuncEntryPageData(i),
+                        R.layout.grid_view_item,
+                        from,
+                        to,
+                        colors);
+                page.setAdapter(adaptor);
+                page.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                            long arg3) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("提示").setMessage(
+                                funcEntryPageOneData.get(position)
+                                        .get("text").toString()).create().show();
+                    }
+                });
+                gridView.add(page);
+            }
+        }
+        funcPage.setAdapter(new ViewPagerAdapter(gridView));
+        funcPage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("提示").setMessage(dataList.get(arg2).get("text").toString()).create().show();
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i = 0; i < thumbViews.length; i++) {
+                    if (position == i) {
+                        ResourceHelper.setImageViewTint(getContext(), thumbViews[i], R.color.bottomItemSelected);
+                    } else {
+                        ResourceHelper.setImageViewTint(getContext(), thumbViews[i], R.color.itemNotSelected);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }
 
-    private void initData() {
-        //图标
-        int icno[] = {R.drawable.ic_func_repair, R.drawable.ic_func_suggestion, R.drawable.ic_func_car, R.drawable.ic_func_report,
-                R.drawable.ic_func_pay,
-                R.drawable.ic_func_notify, R.drawable.ic_func_polling, R.drawable.ic_func_chat, R.drawable.ic_func_sale,
-                R.drawable.ic_func_activity,
-                R.drawable.ic_func_vegetable, R.drawable.ic_func_housekeeping, R.drawable.ic_func_delivery, R.drawable.ic_func_key,
-                R.drawable.ic_func_misc};
-        //图标下的文字
-        String name[] = {
-                "报修", "建议", "车辆", "物业报告", "付费",
-                "邻里提醒", "投票", "闲聊", "二手", "社区活动",
-                "掌上菜场", "家政", "快递", "电子钥匙", "其他"
-        };
+    private void initFeatureEntries(LayoutInflater inflater, View view) {
+//        gridView = (NestedGridView) view.findViewById(R.id.gridview);
+//        //初始化数据
+//        initFuncEntryPageOneData();
+//
+//        String[] from = {"img", "text"};
+//
+//        int[] to = {R.id.item_icon, R.id.item_text};
+//        int colors[] = {R.color.func_1, R.color.func_2, R.color.func_3, R.color.func_4,
+//                R.color.func_5,
+//                R.color.func_6, R.color.func_7, R.color.func_8, R.color.func_9,
+//                R.color.func_4,
+//                R.color.func_green, R.color.func_1, R.color.func_3, R.color.func_5,
+//                R.color.func_2};
+//        adapter = new GridViewColorAdaptor(inflater, getContext(), funcEntryPageOneData, R.layout.grid_view_item, from, to, colors);
+//        gridView.setAdapter(adapter);
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//                                    long arg3) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle("提示").setMessage(funcEntryPageOneData.get(arg2).get("text").toString()).create().show();
+//            }
+//        });
+    }
 
-        dataList = new ArrayList<Map<String, Object>>();
-        for (int i = 0; i < icno.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("img", icno[i]);
-            map.put("text", name[i]);
-            dataList.add(map);
+    private List<Map<String, Object>> initFuncEntryPageData(int pageIndex) {
+        switch (pageIndex) {
+            case 0:
+                initFuncEntryPageOneData();
+                return this.funcEntryPageOneData;
+            case 1:
+                initFuncEntryPageTwoData();
+                return this.funcEntryPageTwoData;
+            default:
+                return new ArrayList<>();
+        }
+    }
+
+    private void initFuncEntryPageOneData() {
+        if (this.funcEntryPageOneData == null) {
+            int icon[] = {R.drawable.ic_func_repair, R.drawable.ic_func_suggestion, R.drawable.ic_func_car, R.drawable.ic_func_report,
+                    R.drawable.ic_func_pay,
+                    R.drawable.ic_func_notify, R.drawable.ic_func_polling, R.drawable.ic_func_chat, R.drawable.ic_func_sale,
+                    R.drawable.ic_func_activity
+            };
+            String name[] = {
+                    "报修", "建议", "车辆", "物业报告", "付费",
+                    "邻里提醒", "投票", "闲聊", "二手", "掌上菜场"
+            };
+
+            funcEntryPageOneData = new ArrayList();
+            for (int i = 0; i < icon.length; i++) {
+                Map<String, Object> map = new HashMap();
+                map.put("img", icon[i]);
+                map.put("text", name[i]);
+                funcEntryPageOneData.add(map);
+            }
+        }
+    }
+
+    private void initFuncEntryPageTwoData() {
+        if (this.funcEntryPageTwoData == null) {
+            int icon[] = {
+                    R.drawable.ic_func_vegetable, R.drawable.ic_func_housekeeping, R.drawable.ic_func_delivery, R.drawable.ic_func_key,
+                    R.drawable.ic_func_misc
+            };
+            String name[] = {
+                    "社区活动", "家政", "快递", "电子钥匙", "其他"
+            };
+
+            funcEntryPageTwoData = new ArrayList();
+            for (int i = 0; i < icon.length; i++) {
+                Map<String, Object> map = new HashMap();
+                map.put("img", icon[i]);
+                map.put("text", name[i]);
+                funcEntryPageTwoData.add(map);
+            }
         }
     }
 
     private void initNotificationZone(View parent) {
-        mViewPager = (ViewPager) parent.findViewById(R.id.viewPager);
-        mCardAdapter = new CardPagerAdapter();
-        mCardAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.notify_content));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.notify_content));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.notify_content));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.action_sign_in));
+        view = (ViewPager) parent.findViewById(R.id.viewPager_notification);
+        cardPagerAdapter = new CardPagerAdapter();
+        cardPagerAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.notify_content));
+        cardPagerAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.notify_content));
+        cardPagerAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.notify_content));
+        cardPagerAdapter.addCardItem(new CardItem(R.string.title_activity_landing, R.string.action_sign_in));
 //        mFragmentCardAdapter = new CardFragmentPagerAdapter(getChildFragmentManager(),
 //                PixelHelper.dpToPixels(2, getContext()));
 
-        mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
-        //mFragmentCardShadowTransformer = new ShadowTransformer(mViewPager, mFragmentCardAdapter);
+        shadowTransformer = new ShadowTransformer(view, cardPagerAdapter);
+        //mFragmentCardShadowTransformer = new ShadowTransformer(view, mFragmentCardAdapter);
 
-        mViewPager.setAdapter(mCardAdapter);
-        mViewPager.setPageTransformer(false, mCardShadowTransformer);
-        mViewPager.setOffscreenPageLimit(3);
+        view.setAdapter(cardPagerAdapter);
+        view.setPageTransformer(false, shadowTransformer);
+        view.setOffscreenPageLimit(3);
     }
 
     private void initToolbar(View view) {
@@ -207,22 +322,22 @@ public class HomeFragment extends Fragment {
                     if (state != CollapsingToolbarLayoutState.EXPANDED) {
                         state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
                         WindowHelper.setStatusBarLightForCollapsingToolbar(getActivity(), barLayout, toolbarLayout, toolbar, R.color.colorPrimary);
-                        DrawableHelper.setTextViewColor(location, primary);
-                        DrawableHelper.setTextViewColor(message, primary);
-                        DrawableHelper.setBackgroundColor(linear, primary);
-                        DrawableHelper.setTextViewColor(city, black);
-                        DrawableHelper.setTextViewColor(community, black);
+                        ResourceHelper.setTextViewColor(location, primary);
+                        ResourceHelper.setTextViewColor(message, primary);
+                        ResourceHelper.setBackgroundColor(linear, primary);
+                        ResourceHelper.setTextViewColor(city, black);
+                        ResourceHelper.setTextViewColor(community, black);
                     }
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                     if (state != CollapsingToolbarLayoutState.COLLAPSED) {
                         state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
                         WindowHelper.translucentStatusBar(getActivity());
 
-                        DrawableHelper.setTextViewColor(location, black);
-                        DrawableHelper.setTextViewColor(message, black);
-                        DrawableHelper.setTextViewColor(city, primary);
-                        DrawableHelper.setTextViewColor(community, primary);
-                        DrawableHelper.setBackgroundColor(linear, ContextCompat.getColor(getContext(), R.color.colorfab));
+                        ResourceHelper.setTextViewColor(location, black);
+                        ResourceHelper.setTextViewColor(message, black);
+                        ResourceHelper.setTextViewColor(city, primary);
+                        ResourceHelper.setTextViewColor(community, primary);
+                        ResourceHelper.setBackgroundColor(linear, ContextCompat.getColor(getContext(), R.color.colorfab));
                     }
                 } else {
                     if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {

@@ -1,18 +1,11 @@
 package com.shanshui.smartcommunity.android;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.shapes.Shape;
-import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +25,8 @@ public class GridViewColorAdaptor extends SimpleAdapter {
     private List<? extends Map<String, ?>> data;
     private LayoutInflater inflater;
     private int currentPos = Integer.MIN_VALUE;
+    private int row = 0;
+    private int column = 0;
 
     public GridViewColorAdaptor(LayoutInflater inflator, Context context, List<? extends Map<String, ?>> data,
                                 @LayoutRes int resource, String[] from, @IdRes int[] to, int[] backgroundColor) {
@@ -39,6 +34,8 @@ public class GridViewColorAdaptor extends SimpleAdapter {
         this.backgroundColor = backgroundColor;
         this.data = data;
         this.inflater = inflator;
+        this.row = context.getResources().getInteger(R.integer.grid_view_row_num);
+        this.column = context.getResources().getInteger(R.integer.grid_view_column_num);
     }
 
     @Override
@@ -59,27 +56,30 @@ public class GridViewColorAdaptor extends SimpleAdapter {
             drawable.setSize(16, 16);
             drawable.setStroke(1, Color.WHITE);
 
-            drawable.setColor(ContextCompat.getColor(this.inflater.getContext(), backgroundColor[position]));
+            drawable.setColor(ContextCompat.getColor(this.inflater.getContext(),
+                    backgroundColor[position % (row * column)]));
 
             holder.icon.setBackground(drawable);
             this.currentPos = position;
             return convertView;
         }
         return convertView;
+    }
 
+    protected int[] getBackgroundColor() {
+        return backgroundColor;
+    }
 
-//        if (convertView == null) {
-//            convertView = inflater.inflate(R.layout.grid_view_item,
-//                    parent, false);
-//            holder = new ViewHolder();
-//            holder.text = (TextView) convertView.findViewById(R.id.item_text);
-//            holder.icon = (ImageView) convertView.findViewById(R.id.item_icon);
-//            convertView.setTag(holder);
-//        } else {
-//            holder = (ViewHolder) convertView.getTag();
-//        }
+    protected List<? extends Map<String, ?>> getData() {
+        return data;
+    }
 
+    protected LayoutInflater getInflater() {
+        return inflater;
+    }
 
+    protected int getCurrentPos() {
+        return currentPos;
     }
 
     static class ViewHolder {

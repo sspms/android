@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.shanshui.smartcommunity.android.NestedGridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridview_func_entry"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimary"
+    android:columnWidth="64dp"
+    android:numColumns="@integer/grid_view_column_num"
+    android:padding="4dp"
+    android:scrollbars="none"
+    android:stretchMode="spacingWidthUniform" />

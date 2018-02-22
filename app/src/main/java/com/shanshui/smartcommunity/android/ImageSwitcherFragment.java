@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewSwitcher;
 
+import com.shanshui.smartcommunity.android.util.ResourceHelper;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,8 +85,13 @@ public class ImageSwitcherFragment extends Fragment implements ViewSwitcher.View
                     new ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             layoutParams.rightMargin = 3;
             layoutParams.leftMargin = 3;
-
-            imageView.setBackgroundResource(R.drawable.ic_blackdot);
+//            mThumbViews[i].setBackgroundResource(R.drawable.ic_blackdot);
+//            if (0 == i) {
+//                ResourceHelper.setImageViewTint(getContext(), mThumbViews[i], R.color.colorPrimary);
+//            } else {
+//                ResourceHelper.setImageViewTint(getContext(), mThumbViews[i], R.color.itemNotSelected);
+//            }
+            //imageView.setBackgroundResource(R.drawable.ic_blackdot);
             linearLayout.addView(imageView, layoutParams);
         }
 
@@ -117,9 +124,12 @@ public class ImageSwitcherFragment extends Fragment implements ViewSwitcher.View
 
     private void setImageBackground(int selectItems) {
         for (int i = 0; i < mThumbViews.length; i++) {
+
             if (i == selectItems) {// in fact, we could use one vector image and set the image tint for different color
+                //ResourceHelper.setImageViewTint(getContext(), mThumbViews[i], R.color.colorPrimary);
                 mThumbViews[i].setBackgroundResource(R.drawable.ic_whitedot);
             } else {
+                //ResourceHelper.setImageViewTint(getContext(), mThumbViews[i], R.color.itemNotSelected);
                 mThumbViews[i].setBackgroundResource(R.drawable.ic_blackdot);
             }
         }
