@@ -14,6 +14,7 @@ import android.view.View;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
+import com.shanshui.smartcommunity.android.util.WindowHelper;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class MainEntryActivity extends AppCompatActivity
     private BottomNavigationBar bottomNavigationBar;
     private ArrayList<Fragment> fragments;
     private ConstraintLayout frameLayout;
+    private int mainPageSystemUiVisibility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,22 @@ public class MainEntryActivity extends AppCompatActivity
                     if (fragment.isHidden()) {
                         ft.show(fragment);
                     }
+                }
+                if (0 == position) {
+                    //mainPageSystemUiVisibility = getWindow().getDecorView().getSystemUiVisibility();
+                    //getWindow().getDecorView().setSystemUiVisibility(mainPageSystemUiVisibility);
+                    HomeFragment home = (HomeFragment) fragments.get(0);
+                    //TODO: extract bar into a class for better encapslation
+                    if (HomeFragment.CollapsingToolbarLayoutState.COLLAPSED.equals(home.getState())) {
+                        WindowHelper.setStatusBarColor(this, getResources().getColor(R.color.colorPrimaryDark));
+                        //home.resetStatusBarTranslucent();
+                    } else {
+                        home.resetStatusBarLight();
+                    }
+                } else {
+                    //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                    WindowHelper.setStatusBarColor(this, getResources().getColor(R.color.colorPrimaryDark));
+                    //WindowHelper.translucentStatusBar(this);
                 }
                 ft.commitAllowingStateLoss();
             }

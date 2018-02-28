@@ -61,6 +61,10 @@ public class HomeFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mName;
+    private AppBarLayout barLayout;
+    private CollapsingToolbarLayout toolbarLayout;
+    private Toolbar toolbar;
+
     private List<NestedGridView> gridView;
     private List<Map<String, Object>> funcEntryPageOneData;
     private List<Map<String, Object>> funcEntryPageTwoData;
@@ -203,32 +207,6 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void initFeatureEntries(LayoutInflater inflater, View view) {
-//        gridView = (NestedGridView) view.findViewById(R.id.gridview);
-//        //初始化数据
-//        initFuncEntryPageOneData();
-//
-//        String[] from = {"img", "text"};
-//
-//        int[] to = {R.id.item_icon, R.id.item_text};
-//        int colors[] = {R.color.func_1, R.color.func_2, R.color.func_3, R.color.func_4,
-//                R.color.func_5,
-//                R.color.func_6, R.color.func_7, R.color.func_8, R.color.func_9,
-//                R.color.func_4,
-//                R.color.func_green, R.color.func_1, R.color.func_3, R.color.func_5,
-//                R.color.func_2};
-//        adapter = new GridViewColorAdaptor(inflater, getContext(), funcEntryPageOneData, R.layout.grid_view_item, from, to, colors);
-//        gridView.setAdapter(adapter);
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//                                    long arg3) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                builder.setTitle("提示").setMessage(funcEntryPageOneData.get(arg2).get("text").toString()).create().show();
-//            }
-//        });
-    }
-
     private List<Map<String, Object>> initFuncEntryPageData(int pageIndex) {
         switch (pageIndex) {
             case 0:
@@ -302,10 +280,18 @@ public class HomeFragment extends Fragment {
         view.setOffscreenPageLimit(3);
     }
 
+    public void resetStatusBarLight() {
+        WindowHelper.setStatusBarLightForCollapsingToolbar(getActivity(), barLayout, toolbarLayout, toolbar, R.color.colorPrimary);
+    }
+
+    public void resetStatusBarTranslucent() {
+        WindowHelper.translucentStatusBar(getActivity());
+    }
+
     private void initToolbar(View view) {
-        final AppBarLayout barLayout = view.findViewById(R.id.appbar);
-        final CollapsingToolbarLayout toolbarLayout = view.findViewById(R.id.collapsing_layout);
-        final Toolbar toolbar = view.findViewById(R.id.toolbar);
+        barLayout = view.findViewById(R.id.appbar);
+        toolbarLayout = view.findViewById(R.id.collapsing_layout);
+        toolbar = view.findViewById(R.id.toolbar);
         final LinearLayout linear = view.findViewById(R.id.ll_home_header);
         final TextView location = view.findViewById(R.id.btn_auto_loc);
         final TextView message = view.findViewById(R.id.btn_msg);
@@ -331,8 +317,8 @@ public class HomeFragment extends Fragment {
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                     if (state != CollapsingToolbarLayoutState.COLLAPSED) {
                         state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
-                        WindowHelper.translucentStatusBar(getActivity());
-
+                        //resetStatusBarTranslucent();
+                        WindowHelper.setStatusBarColor(getActivity(), getResources().getColor(R.color.colorPrimaryDark));
                         ResourceHelper.setTextViewColor(location, black);
                         ResourceHelper.setTextViewColor(message, black);
                         ResourceHelper.setTextViewColor(city, primary);
@@ -454,6 +440,10 @@ public class HomeFragment extends Fragment {
         return data;
     }
 
+    public CollapsingToolbarLayoutState getState() {
+        return state;
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -493,7 +483,7 @@ public class HomeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private enum CollapsingToolbarLayoutState {
+    public static enum CollapsingToolbarLayoutState {
         EXPANDED,
         COLLAPSED,
         INTERNEDIATE

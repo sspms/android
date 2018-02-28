@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewSwitcher;
 
-import com.shanshui.smartcommunity.android.util.ResourceHelper;
-
 
 /**
  * A simple {@link Fragment} subclass.

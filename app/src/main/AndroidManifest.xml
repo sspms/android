@@ -38,7 +38,7 @@
         <activity
             android:name=".MainEntryActivity"
             android:label="@string/title_activity_main_entry"
-            android:theme="@style/AppTheme.StatusBarWhite.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgContent"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <!-- LEFT TITLE PART -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:background="@color/chocolate"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/vote_countdown_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="距离结束"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp" />
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/vote_countdown_title"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="4dp">-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/vote_countdown_11"-->
+        <!--android:layout_width="25dp"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/vote_countdown_12"-->
+        <!--android:layout_width="24dp"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp"-->
+        <!--android:layout_toRightOf="@+id/vote_countdown_11"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/vote_countdown_13"-->
+        <!--android:layout_width="24dp"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:layout_alignParentRight="false"-->
+        <!--android:layout_toRightOf="@+id/vote_countdown_12"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/vote_countdown_devider"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_alignEnd="@+id/vote_countdown_13"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_11"-->
+        <!--android:layout_below="@id/vote_countdown_11"-->
+        <!--android:src="@color/chocolate" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/vote_countdown_21"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:layout_alignEnd="@+id/vote_countdown_11"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_11"-->
+        <!--android:layout_below="@+id/vote_countdown_devider"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/vote_countdown_22"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:layout_alignEnd="@+id/vote_countdown_12"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_12"-->
+        <!--android:layout_below="@+id/vote_countdown_devider"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/vote_countdown_23"-->
+
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:layout_alignEnd="@+id/vote_countdown_13"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_13"-->
+        <!--android:layout_below="@+id/vote_countdown_devider"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/vote_countdown_days"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_11"-->
+        <!--android:layout_alignTop="@+id/vote_countdown_11"-->
+        <!--android:layout_marginStart="3dp"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:text="00"-->
+        <!--android:textColor="@color/colorPrimary" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/vote_countdown_hours"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_12"-->
+        <!--android:layout_alignTop="@+id/vote_countdown_12"-->
+        <!--android:layout_marginStart="4dp"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:text="23"-->
+        <!--android:textColor="@color/colorPrimary" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/vote_countdown_minutes"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/vote_countdown_13"-->
+        <!--android:layout_alignTop="@+id/vote_countdown_13"-->
+        <!--android:layout_marginStart="4dp"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:text="14"-->
+        <!--android:textColor="@color/colorPrimary" />-->
+        <!--</RelativeLayout>-->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vote_countdown_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp">
+
+
+
+            <LinearLayout
+                android:id="@+id/vote_countdown_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/vote_countdown_day_num"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@color/black_overlay"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/black_overlay"
+                    android:gravity="center"
+                    android:text="54"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/vote_countdown_second_num"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@color/black_overlay"
+                    android:gravity="center"
+                    android:text="15"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/vote_countdown_devider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignEnd="@+id/vote_countdown_num"
+                android:layout_alignLeft="@+id/vote_countdown_num"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignRight="@+id/vote_countdown_num"
+                android:layout_alignStart="@+id/vote_countdown_num"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="11dp"
+                android:src="@color/chocolate" />
+            <!--<LinearLayout-->
+                <!--android:id="@+id/vote_countdown_11"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="12dp"-->
+                <!--android:background="@color/black_overlay"-->
+                <!--android:orientation="vertical" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/vote_countdown_12"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="12dp"-->
+                <!--android:layout_marginLeft="4dp"-->
+                <!--android:layout_marginRight="4dp"-->
+                <!--android:layout_toRightOf="@+id/vote_countdown_11"-->
+                <!--android:background="@color/black_overlay"-->
+                <!--android:orientation="vertical" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/vote_countdown_13"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="12dp"-->
+                <!--android:layout_alignParentRight="false"-->
+                <!--android:layout_toRightOf="@+id/vote_countdown_12"-->
+                <!--android:background="@color/black_overlay"-->
+                <!--android:orientation="vertical" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/vote_countdown_devider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_alignEnd="@+id/vote_countdown_13"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_11"-->
+                <!--android:layout_below="@id/vote_countdown_11"-->
+                <!--android:src="@color/chocolate" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/vote_countdown_21"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="12dp"-->
+                <!--android:layout_alignEnd="@+id/vote_countdown_11"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_11"-->
+                <!--android:layout_below="@+id/vote_countdown_devider"-->
+                <!--android:background="@color/black_overlay"-->
+                <!--android:orientation="vertical" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/vote_countdown_22"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="12dp"-->
+                <!--android:layout_alignEnd="@+id/vote_countdown_12"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_12"-->
+                <!--android:layout_below="@+id/vote_countdown_devider"-->
+                <!--android:background="@color/black_overlay"-->
+                <!--android:orientation="vertical" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/vote_countdown_23"-->
+
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="12dp"-->
+                <!--android:layout_alignEnd="@+id/vote_countdown_13"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_13"-->
+                <!--android:layout_below="@+id/vote_countdown_devider"-->
+                <!--android:background="@color/black_overlay"-->
+                <!--android:orientation="vertical" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/vote_countdown_days"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_11"-->
+                <!--android:layout_alignTop="@+id/vote_countdown_11"-->
+                <!--android:layout_marginStart="3dp"-->
+                <!--android:layout_marginTop="3dp"-->
+                <!--android:text="00"-->
+                <!--android:textColor="@color/colorPrimary" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/vote_countdown_hours"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_12"-->
+                <!--android:layout_alignTop="@+id/vote_countdown_12"-->
+                <!--android:layout_marginStart="4dp"-->
+                <!--android:layout_marginTop="3dp"-->
+                <!--android:text="23"-->
+                <!--android:textColor="@color/colorPrimary" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/vote_countdown_minutes"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignStart="@+id/vote_countdown_13"-->
+                <!--android:layout_alignTop="@+id/vote_countdown_13"-->
+                <!--android:layout_marginStart="4dp"-->
+                <!--android:layout_marginTop="3dp"-->
+                <!--android:text="14"-->
+                <!--android:textColor="@color/colorPrimary" />-->
+        </RelativeLayout>
+    </RelativeLayout>
+    <!-- RIGHT TITLE PART -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@color/bgTitleRight"
+        android:padding="4dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/title_property_issue_loc"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/title_from_to_dots"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/title_from_to_dots"
+            android:layout_toRightOf="@+id/title_from_to_dots"
+            android:ellipsize="marquee"
+
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:text="业委会换届选举"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/title_from_to_dots_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/title_property_issue_loc"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/title_from_to_dots"
+            android:layout_toRightOf="@+id/title_from_to_dots"
+            android:src="@color/contentDividerLine" />
+
+        <TextView
+            android:id="@+id/title_property_issue_status"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="false"
+            android:text="29.8%"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/title_property_issue_status"
+            android:layout_alignLeft="@id/title_property_issue_status"
+            android:layout_alignStart="@id/title_property_issue_status"
+            android:layout_below="@+id/title_from_to_dots_divider"
+            android:text="投票率" />
+
+        <TextView
+            android:id="@+id/title_weight"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentStart="true"
+            android:text="453" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/title_weight"-->
+        <!--style="@style/TitleBadgeText"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:text="@string/weight_mock" />-->
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/title_weight"
+            android:layout_alignLeft="@id/title_weight"
+            android:layout_alignStart="@id/title_weight"
+            android:layout_below="@+id/title_from_to_dots_divider"
+            android:text="已投票" />
+
+        <TextView
+            android:id="@+id/title_property_issue_category"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="1500"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/title_property_issue_category"
+            android:layout_alignLeft="@id/title_property_issue_category"
+            android:layout_alignStart="@id/title_property_issue_category"
+            android:layout_below="@+id/title_from_to_dots_divider"
+            android:text="总户数" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.5"
+        android:background="@color/colorfab"
+        android:contextClickable="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="进行中"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

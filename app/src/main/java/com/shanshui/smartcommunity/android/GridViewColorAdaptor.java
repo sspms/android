@@ -47,9 +47,9 @@ public class GridViewColorAdaptor extends SimpleAdapter {
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.item_text);
             holder.icon = (ImageView) convertView.findViewById(R.id.item_icon);
-            convertView.setTag(holder);
             holder.text.setText(this.data.get(position).get("text").toString());
             holder.icon.setImageResource((Integer) this.data.get(position).get("img"));
+            convertView.setTag(holder);
 
             GradientDrawable drawable = new GradientDrawable();
             drawable.setShape(GradientDrawable.OVAL);
