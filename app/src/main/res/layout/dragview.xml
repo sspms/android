@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--DragLayout要求所有子View的layout_gravity都居中显示-->
+
+<com.shanshui.smartcommunity.android.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    android:id="@+id/drag_layout"
+    android:layout_width=""
+    android:layout_height="match_parent"
+    app:bototmExtraIndicatorHeight="20dp"
+    app:bottomDragVisibleHeight="40dp">
+
+    <!--1. 这个是底部的view-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:alpha="0"
+        android:background="@color/blueviolet">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blueviolet"
+            android:orientation="vertical">
+
+            <NumberPicker
+                android:id="@+id/numberPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/numberPicker"
+                android:src="@drawable/ic_shoppingcart"
+                app:srcCompat="@drawable/ic_shoppingcart" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!--2. 頂層可滑动的View-->
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="@dimen/card_extra_height"
+        android:elevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_baicai" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image"
+                android:layout_centerInParent="false"
+                android:layout_margin="4dp"
+                android:layout_toLeftOf="@+id/veg_price"
+                android:text="白菜" />
+
+            <TextView
+                android:id="@+id/veg_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/image"
+                android:layout_margin="4dp"
+                android:text="1.26元/斤" />
+        </RelativeLayout>
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:padding="5dp">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/address1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:text="NORTH LAT"-->
+        <!--android:textColor="#12edf0"-->
+        <!--android:textSize="15sp" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/address2"-->
+        <!--android:layout_width="22dp"-->
+        <!--android:layout_height="22dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:scaleType="fitXY" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/address3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:text="EAST LNG 17"-->
+        <!--android:textColor="#12edf0"-->
+        <!--android:textSize="13sp" />-->
+
+        <!--</RelativeLayout>-->
+
+    </android.support.v7.widget.CardView>
+
+</com.shanshui.smartcommunity.android.DragLayout>

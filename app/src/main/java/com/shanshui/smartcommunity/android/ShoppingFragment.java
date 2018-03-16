@@ -1,23 +1,21 @@
 package com.shanshui.smartcommunity.android;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.flyco.tablayout.widget.MsgView;
-import com.ramotion.foldingcell.FoldingCell;
+import com.shanshui.smartcommunity.android.adaptor.VegetableItemAdaptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +37,7 @@ public class ShoppingFragment extends Fragment implements OnTabSelectListener {
     // TODO: Rename and change types of parameters
     private String mName;
     private final String[] subTabs = {
-            "掌上团菜", "家政服务", "幼托服务", "二手市场"
+            "掌上团菜", "社区商业", "家政服务", "二手市场"
     };
     private SlidingTabLayout tabLayout_2;
     private OnFragmentInteractionListener mListener;
@@ -75,50 +73,47 @@ public class ShoppingFragment extends Fragment implements OnTabSelectListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_property, container, false);
+        FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_shopping, container, false);
+        final NestedScrollView nsv = frameLayout.findViewById(R.id.shopping_scroll_view);
+        NestedViewPager vp = frameLayout.findViewById(R.id.vp);
 
-        ViewPager vp = frameLayout.findViewById(R.id.vp);
-        List<ListView> listViews = new ArrayList();
+        List<LinearLayout> listViews = new ArrayList();
         for (int i = 0; i < this.subTabs.length; i++) {
-            ListView listView = (ListView) inflater.inflate(R.layout.cell_listview, frameLayout, false);
-            listViews.add(listView);
-
-            // prepare elements to display
-            final ArrayList<Item> items = Item.getTestingList();
-
-            // add custom btn handler to first list item
-            items.get(0).setRequestBtnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getContext(), "CUSTOM HANDLER FOR FIRST BUTTON", Toast.LENGTH_SHORT).show();
-                }
-            });
+            LinearLayout scrollView = (LinearLayout) inflater.inflate(R.layout.shopping_veg, frameLayout, false);
+            //NestedGridView ngv = scrollView.findViewById(R.id.gridview_veg);
+            //ngv.setAdapter(new GridViewBaseAdaptor(inflater, getContext(), SellingItem.mock()));
+            RecyclerView cell = scrollView.findViewById(R.id.veg_recycler_view);
 
             // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-            final FoldingCellListAdapter adapter = new FoldingCellListAdapter(getContext(), items);
-
-            // add default btn handler for each request btn on each item if custom handler not found
-            adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getContext(), "DEFAULT HANDLER FOR ALL BUTTONS", Toast.LENGTH_SHORT).show();
-                }
-            });
-
+            final VegetableItemAdaptor adapter = new VegetableItemAdaptor(getContext(), R.layout.cell_veg, SellingItem.mock());
+            LinearLayoutManager llm = new LinearLayoutManager(getContext());
             // set elements to adapter
-            listView.setAdapter(adapter);
-
+            cell.setAdapter(adapter);
+            cell.setLayoutManager(llm);
+//            cell.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    if (event.getAction() == MotionEvent.ACTION_UP) {
+//                        nsv.requestDisallowInterceptTouchEvent(false);
+//                    } else {
+//                        nsv.requestDisallowInterceptTouchEvent(true);
+//                    }
+//                    return false;
+//                }
+//            });
             // set on click event listener to list view
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                    // toggle clicked cell state
-                    ((FoldingCell) view).toggle(false);
-                    // register in adapter that state for selected cell is toggled
-                    adapter.registerToggle(pos);
-                }
-            });
+//            cell.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+//                    // toggle clicked cell state
+//
+//                    ((FoldingCell) view).toggle(false);
+//                    // register in adapter that state for selected cell is toggled
+//                    adapter.registerToggle(pos);
+//                }
+//            });
 
+            listViews.add(scrollView);
         }
 
         vp.setAdapter(new ViewPagerAdapter(listViews));

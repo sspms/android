@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentTop="false"
+            android:fitsSystemWindows="false"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_veg_adv" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/veg_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/veg_items_container"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--</LinearLayout>-->
+
+    <!--<ListView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/veg_list_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/background"-->
+    <!--android:clipChildren="false"-->
+    <!--android:clipToPadding="false"-->
+    <!--android:divider="@android:color/transparent"-->
+    <!--android:dividerHeight="4dp"-->
+    <!--android:paddingBottom="80dp"-->
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
+    <!--android:scrollbars="none" />-->
+    <!--<com.shanshui.smartcommunity.android.NestedGridView-->
+    <!--android:id="@+id/gridview_veg"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:columnWidth="200dp"-->
+    <!--android:numColumns="2"-->
+    <!--android:padding="0dp"-->
+    <!--android:scrollbars="none"-->
+    <!--android:stretchMode="spacingWidthUniform" />-->
+</LinearLayout>
+
+    <!--<androidroid.support.v4.widget.NestedScrollView --><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+
+    <!--</androidroid.support.v4.widget.NestedScrollView>-->

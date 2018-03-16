@@ -7,4 +7,6 @@
     <dimen name="fixed_label_active">10sp</dimen>
     <dimen name="shifting_label">10sp</dimen>
     <dimen name="fixed_label_inactive">10sp</dimen>
+    <dimen name="card_bottom_info_height">150dp</dimen>
+    <dimen name="card_extra_height">20dp</dimen>
 </resources>
