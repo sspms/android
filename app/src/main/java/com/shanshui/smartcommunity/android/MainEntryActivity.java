@@ -89,12 +89,13 @@ public class MainEntryActivity extends AppCompatActivity
         bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         bottomNavigationBar.setBackgroundResource(R.color.bottomBackground);
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_homepage, R.string.bottom_tab_home).setActiveColorResource(R.color.bottomItemSelected))
-                .addItem(new BottomNavigationItem(R.drawable.ic_propertymanagement, R.string.bottom_tab_property).setActiveColorResource(R.color.bottomItemSelected))
-                .addItem(new BottomNavigationItem(R.drawable.ic_neighbourhood, R.string.bottom_tab_neighbourhood).setActiveColorResource(R.color.bottomItemSelected))
-                .addItem(new BottomNavigationItem(R.drawable.ic_shopping, R.string.bottom_tab_shopping).setActiveColorResource(R.color.bottomItemSelected))
+                .addItem(new BottomNavigationItem(R.drawable.ic_propertymanagement, R.string.bottom_tab_property).setActiveColorResource(R.color.bgTitleLeft))
+                .addItem(new BottomNavigationItem(R.drawable.ic_neighbourhood, R.string.bottom_tab_neighbourhood).setActiveColorResource(R.color.chocolate))
+                .addItem(new BottomNavigationItem(R.drawable.ic_shopping, R.string.bottom_tab_shopping).setActiveColorResource(R.color.chartreuse))
                 .addItem(new BottomNavigationItem(R.drawable.ic_me, R.string.bottom_tab_me).setActiveColorResource(R.color.bottomItemSelected))
                 .setFirstSelectedPosition(0)
                 .initialise();
+        bottomNavigationBar.setAutoHideEnabled(false);
         bottomNavigationBar.setBackgroundStyle(BACKGROUND_STYLE_STATIC);
         bottomNavigationBar.setTabSelectedListener(this);
     }

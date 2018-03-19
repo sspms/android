@@ -24,7 +24,6 @@
             android:id="@+id/title_property_issue_days_passed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_time_label"
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="false"
             android:layout_centerHorizontal="false"
@@ -33,7 +32,6 @@
             android:text="三天前"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
-
 
     </RelativeLayout>
     <!-- RIGHT TITLE PART -->

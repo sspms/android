@@ -16,59 +16,35 @@
         android:paddingRight="16dp"
         android:paddingTop="8dp">
 
-        <RelativeLayout
-            android:id="@+id/property_issue_barnar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/property_issue_loc"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableTint="@color/colorPrimary"
-                android:text="业委会换届选举"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/property_issue_id"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="@string/order_id_mock"
-                android:textColor="@android:color/white" />
-
-            <!--<TextView-->
-            <!--android:id="@+id/property_issue_id"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:text="@string/order_id_mock"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textSize="20sp"-->
-            <!--android:textStyle="bold" />-->
-            <ImageView
-                android:id="@+id/property_issue_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/menu_icon" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/property_issue_loc"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/property_issue_barnar"
-            android:orientation="vertical">
+            android:layout_centerInParent="true"
+            android:drawableTint="@color/colorPrimary"
+            android:text="业委会换届选举"
+            android:textColor="@android:color/white" />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/property_issue_id"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/order_id_mock"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/property_issue_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_icon" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -197,59 +173,52 @@
             android:src="@color/contentDividerLine" />
 
         <!-- addresses part -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/property_issue_description_title"
+                style="@style/ContentMainBadgeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="公告"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/property_issue_description_title"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="公告"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/property_issue_description"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/property_issue_description_title"
-                    android:layout_alignStart="@id/property_issue_description_title"
-                    android:layout_below="@id/property_issue_description_title"
-                    android:text="根据玄武区选举委员会的有关规定，本选区定于11月24日9：00～14：00，选民在中心投票站和各分投票站，同时参加投票选举玄武区第十八届人民代表大会代表。请选民互相转告。届时请各选民小组组织选民并携带选民证（身份证），准时到站（会）参加选举。
+            <TextView
+                android:id="@+id/property_issue_description"
+                style="@style/ContentMainBadgeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/property_issue_description_title"
+                android:layout_alignStart="@id/property_issue_description_title"
+                android:layout_below="@id/property_issue_description_title"
+                android:text="根据玄武区选举委员会的有关规定，本选区定于11月24日9：00～14：00，选民在中心投票站和各分投票站，同时参加投票选举玄武区第十八届人民代表大会代表。请选民互相转告。届时请各选民小组组织选民并携带选民证（身份证），准时到站（会）参加选举。
 
 
 
 
-                                                                                        南京理工大学直属选区
+                                                                                    南京理工大学直属选区
 
-                                                                                        2016年11月18日" />
+                                                                                    2016年11月18日" />
 
-                <TextView
-                    android:id="@+id/vote_go_vote"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/property_issue_description"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/chocolate"
-                    android:padding="10dp"
-                    android:text="投票"
-                    android:textAlignment="center"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="20sp" />
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/vote_go_vote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/property_issue_description"
+                android:layout_marginTop="16dp"
+                android:background="@color/chocolate"
+                android:padding="10dp"
+                android:text="投票"
+                android:textAlignment="center"
+                android:textColor="@color/mainTextColor"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
-        </LinearLayout>
         <!-- request button -->
     </LinearLayout>
 </LinearLayout>

@@ -4,21 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.shanshui.smartcommunity.android.adaptor.VegetableItemAdaptor;
+import com.github.florent37.materialviewpager.MaterialViewPager;
+import com.github.florent37.materialviewpager.header.HeaderDesign;
 
-import java.util.ArrayList;
-import java.util.List;
+import butterknife.BindView;
 
 
 /**
@@ -35,11 +34,15 @@ public class ShoppingFragment extends Fragment implements OnTabSelectListener {
     private static final String ARG_PARAM1 = "param1";
 
     // TODO: Rename and change types of parameters
+    @BindView(R.id.materialViewPager)
+    MaterialViewPager mViewPager;
+
+
     private String mName;
     private final String[] subTabs = {
             "掌上团菜", "社区商业", "家政服务", "二手市场"
     };
-    private SlidingTabLayout tabLayout_2;
+
     private OnFragmentInteractionListener mListener;
 
     public ShoppingFragment() {
@@ -74,62 +77,72 @@ public class ShoppingFragment extends Fragment implements OnTabSelectListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_shopping, container, false);
-        final NestedScrollView nsv = frameLayout.findViewById(R.id.shopping_scroll_view);
-        NestedViewPager vp = frameLayout.findViewById(R.id.vp);
+        mViewPager = frameLayout.findViewById(R.id.materialViewPager);
+        //ButterKnife.bind(getActivity());
 
-        List<LinearLayout> listViews = new ArrayList();
-        for (int i = 0; i < this.subTabs.length; i++) {
-            LinearLayout scrollView = (LinearLayout) inflater.inflate(R.layout.shopping_veg, frameLayout, false);
-            //NestedGridView ngv = scrollView.findViewById(R.id.gridview_veg);
-            //ngv.setAdapter(new GridViewBaseAdaptor(inflater, getContext(), SellingItem.mock()));
-            RecyclerView cell = scrollView.findViewById(R.id.veg_recycler_view);
-
-            // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-            final VegetableItemAdaptor adapter = new VegetableItemAdaptor(getContext(), R.layout.cell_veg, SellingItem.mock());
-            LinearLayoutManager llm = new LinearLayoutManager(getContext());
-            // set elements to adapter
-            cell.setAdapter(adapter);
-            cell.setLayoutManager(llm);
-//            cell.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    if (event.getAction() == MotionEvent.ACTION_UP) {
-//                        nsv.requestDisallowInterceptTouchEvent(false);
-//                    } else {
-//                        nsv.requestDisallowInterceptTouchEvent(true);
-//                    }
-//                    return false;
-//                }
-//            });
-            // set on click event listener to list view
-//            cell.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-//                    // toggle clicked cell state
-//
-//                    ((FoldingCell) view).toggle(false);
-//                    // register in adapter that state for selected cell is toggled
-//                    adapter.registerToggle(pos);
-//                }
-//            });
-
-            listViews.add(scrollView);
+        final Toolbar toolbar = mViewPager.getToolbar();
+        if (toolbar != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         }
 
-        vp.setAdapter(new ViewPagerAdapter(listViews));
-        vp.setCurrentItem(0);
-        tabLayout_2 = frameLayout.findViewById(R.id.tl_2);
+        mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
 
-        tabLayout_2.setViewPager(vp, this.subTabs);
-        tabLayout_2.setOnTabSelectListener(this);
+            @Override
+            public Fragment getItem(int position) {
+                switch (position % 4) {
+                    //case 0:
+                    //    return RecyclerViewFragment.newInstance();
+                    //case 1:
+                    //    return RecyclerViewFragment.newInstance();
+                    //case 2:
+                    //    return WebViewFragment.newInstance();
+                    default:
+                        return RecyclerViewFragment.newInstance();
+                }
+            }
 
-        //int currentPos = 0;
-        //vp.setCurrentItem(currentPos);
+            @Override
+            public int getCount() {
+                return 4;
+            }
 
-        tabLayout_2.showDot(0);
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return subTabs[position % 4];
+            }
+        });
 
-        tabLayout_2.showMsg(3, 5);
-        tabLayout_2.setMsgMargin(3, 0, 10);
+        mViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
+            @Override
+            public HeaderDesign getHeaderDesign(int page) {
+                switch (page) {
+                    case 0:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.chartreuse,
+                                "https://cdn.pixabay.com/photo/2018/03/09/17/44/paprika-3212148_960_720.jpg");
+                    case 1:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.chocolate,
+                                "https://cdn.pixabay.com/photo/2017/08/07/19/46/shop-2607121_1280.jpg");
+                    case 2:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.peachpuff,
+                                "https://images.pexels.com/photos/584399/living-room-couch-interior-room-584399.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb");
+                    case 3:
+                        return HeaderDesign.fromColorResAndUrl(
+                                R.color.gray,
+                                "https://cdn.pixabay.com/photo/2017/05/29/12/26/second-hand-2353682_1280.png");
+                }
+
+                //execute others actions if needed (ex : modify your header logo)
+
+                return null;
+            }
+        });
+
+        mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
+        mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
+        
         return frameLayout;
     }
 

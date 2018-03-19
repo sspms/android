@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--<com.ramotion.foldingcell.FoldingCell xmlns:folding-cell="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/veg_item_id"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingBottom="1dp"-->
+        <!--android:paddingLeft="8dp"-->
+        <!--android:paddingRight="8dp"-->
+        <!--android:paddingTop="1dp"-->
+        <!--folding-cell:additionalFlipsCount="1"-->
+        <!--folding-cell:animationDuration="1000"-->
+        <!--folding-cell:backSideColor="@color/bgBackSideColor"-->
+        <!--folding-cell:cameraHeight="30">-->
+
+        <!-- CONTENT (UNFOLDED) LAYOUT (MUST BE AT LEAST 2x times BIGGER than content layout bellow)-->
+        <include layout="@layout/shopping_veg_cell_content" />
+
+        <!-- TITLE (FOLDED) LAYOUT (MUST BE AT LEAST 2x times SMALLER than content layout above) -->
+        <!--<include layout="@layout/shopping_veg_cell_title" />-->
+
+    <!--</com.ramotion.foldingcell.FoldingCell>-->
+</FrameLayout>

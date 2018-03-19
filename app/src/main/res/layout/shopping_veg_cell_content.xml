@@ -1,318 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="gone">
-    <!--<include layout="@layout/shopping_veg_cell_title"/>-->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bgContent"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp"
+    android:elevation="1dip"
+    android:visibility="visible"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="1dip"
+    app:cardMaxElevation="1dip">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3.5"
-            android:background="@color/colorfab"
-            android:contextClickable="false">
-
-            <ImageView
-                android:id="@+id/vg_content_pic"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_baicai" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@color/colorfab"
-            android:padding="4dp"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:id="@+id/veg_content_name"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentStart="true"
-                android:layout_centerHorizontal="true"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:singleLine="true"
-                android:text="白菜"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/veg_caichang_price_title"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/veg_caichang_price"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentStart="false"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="false"
-                android:layout_toLeftOf="@+id/veg_caichang_price"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:singleLine="true"
-                android:text="菜场价格:"
-                android:textAlignment="center"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/veg_caichang_price"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="false"
-                android:layout_centerHorizontal="true"
-                android:background="@color/chocolate"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:singleLine="true"
-                android:text="3.5"
-                android:textSize="18sp" />
-            <!--<TextView-->
-            <!--android:id="@+id/title_weight"-->
-            <!--style="@style/TitleBadgeText"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:text="@string/weight_mock" />-->
-
-            <TextView
-                android:id="@+id/veg_produce_location"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentStart="false"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@+id/veg_produce_location_title"
-                android:text="山东寿光" />
-
-            <TextView
-                android:id="@+id/veg_produce_location_title"
-                style="@style/TitleBadgeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="产地:" />
-
-            <TextView
-                android:id="@+id/veg_unit"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:text="元/斤"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/veg_unit_title"
-                style="@style/TitleBadgeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="false"
-                android:layout_toLeftOf="@+id/veg_unit"
-                android:text="单位:" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3.5"
-            android:background="@color/chartreuse"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:id="@+id/vote_countdown_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="专享价"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/vote_countdown_box"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp">
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/veg_content_price_before_zero"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@color/black_overlay"
-                        android:gravity="center"
-                        android:text="03"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="."
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/veg_content_price_after_zero"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@color/black_overlay"
-                        android:gravity="center"
-                        android:text="15"
-                        android:textColor="@color/colorPrimary" />
-
-                </LinearLayout>
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
-    <!-- content header line -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorfab"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
-            android:paddingTop="8dp">
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/vg_content_pic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_weight="0.5"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_baicai" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/veg_content_name"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:singleLine="true"
+                    android:text="白菜"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/title_from_to_dots_divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/veg_content_name"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@color/contentDividerLine" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/title_weight"-->
+                <!--style="@style/TitleBadgeText"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="@string/weight_mock" />-->
+
+                <TextView
+                    android:id="@+id/veg_produce_location"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_content_name"
+                    android:layout_alignBottom="@+id/veg_content_name"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/veg_produce_location_title"
+                    android:text="山东寿光" />
+
+                <TextView
+                    android:id="@+id/veg_produce_location_title"
+                    style="@style/TitleBadgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_content_name"
+                    android:layout_centerHorizontal="false"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="false"
+                    android:text="产地:" />
+
+                <TextView
+                    android:id="@+id/veg_content_price_before_zero"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_yuan_mark"
+                    android:layout_below="@+id/title_from_to_dots_divider2"
+                    android:layout_toRightOf="@+id/veg_yuan_mark"
+                    android:gravity="center"
+                    android:text="3.15"
+                    android:textColor="@color/crimson"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/veg_caichang_price_title"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_content_price_before_zero"
+                    android:layout_alignLeft="@+id/veg_produce_location_title"
+                    android:layout_alignParentStart="false"
+                    android:layout_below="@+id/title_from_to_dots_divider2"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:singleLine="true"
+                    android:text="菜场价:"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/veg_yuan_mark"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:layout_below="@+id/title_from_to_dots_divider2"
+                    android:layout_centerInParent="false"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="5dp"
+                    android:text="￥"
+                    android:textColor="@color/crimson" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/veg_yuan_mark"
+                    android:layout_marginTop="8dp"
+                    android:layout_toStartOf="@+id/veg_content_price_before_zero"
+                    android:background="@color/crimson"
+                    android:text="券"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/veg_unit"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_content_price_before_zero"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_below="@+id/title_from_to_dots_divider2"
                     android:layout_centerHorizontal="false"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="单位： 斤"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/veg_content_price_before_zero"
+                    android:text="元/斤"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/veg_unit2"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_caichang_price_title"
+                    android:layout_below="@+id/title_from_to_dots_divider2"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toEndOf="@+id/veg_caichang_price"
+                    android:text="元/斤"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/veg_caichang_price"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/veg_caichang_price_title"
+                    android:layout_alignBottom="@+id/veg_caichang_price_title"
+                    android:layout_below="@+id/title_from_to_dots_divider2"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@+id/veg_caichang_price_title"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:text="3.5"
+                    android:textSize="10sp" />
+
+                <TextView
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="小区今日已团：130斤"
+                    android:textSize="10sp" />
 
                 <ImageView
-                    android:id="@+id/vote_go_vote"
+                    android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="13dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorfab"
-                    android:padding="10dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/mainTextColor"
                     app:srcCompat="@drawable/ic_shoppingcart" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="false"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true">
-
-                    <TextView
-                        android:id="@+id/shopping_veg_minus"
-                        android:layout_width="48dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="false"
-                        android:layout_alignParentStart="true"
-                        android:background="@color/contentBadgeTitle"
-                        android:text="-"
-                        android:textAlignment="center"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/shoping_veg_value"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_toRightOf="@+id/shopping_veg_minus"
-                        android:background="@color/contentBadgeTitle"
-                        android:paddingLeft="4dp"
-                        android:paddingRight="4dp"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/shopping_veg_add"
-                        android:layout_width="48dp"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/shoping_veg_value"
-                        android:background="@color/contentBadgeTitle"
-                        android:text="+"
-                        android:textAlignment="center"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
             </RelativeLayout>
-        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="小区今日已团：130斤" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+</android.support.v7.widget.CardView>

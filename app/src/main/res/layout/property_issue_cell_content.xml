@@ -7,10 +7,11 @@
     android:visibility="gone">
 
     <!-- content header line -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bgContentTop"
+        android:orientation="vertical"
         android:paddingBottom="7dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
@@ -76,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true" />
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -180,34 +181,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/property_issue_description_title"
+                style="@style/ContentMainBadgeTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:text="描述"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/property_issue_description_title"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="描述"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/property_issue_description"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/property_issue_description_title"
-                    android:layout_alignStart="@id/property_issue_description_title"
-                    android:layout_below="@id/property_issue_description_title"
-                    android:text="@string/notify_content" />
-
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/property_issue_description"
+                style="@style/ContentMainBadgeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/notify_content" />
 
         </LinearLayout>
 
@@ -220,45 +211,39 @@
             android:src="@color/contentDividerLine" />
 
         <!-- dates part -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <RelativeLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/property_issue_pic_title"
+                style="@style/ContentMainBadgeTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="图片"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/property_issue_pic_title"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="图片"
-                    android:textStyle="bold" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/property_issue_pic_title"
+                app:srcCompat="@drawable/ic_cover_4" />
+            <!--<TextView-->
+            <!--android:id="@+id/content_delivery_date"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignLeft="@id/property_issue_pic_title"-->
+            <!--android:layout_alignStart="@id/property_issue_pic_title"-->
+            <!--android:layout_below="@id/property_issue_pic_title"-->
+            <!--android:text="@string/delivery_date_mock"-->
+            <!--android:textColor="@color/mainTextColor"-->
+            <!--android:textSize="14sp" />-->
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="80dp"
-                    android:layout_below="@+id/property_issue_pic_title"
-                    app:srcCompat="@drawable/ic_cover_4" />
-                <!--<TextView-->
-                <!--android:id="@+id/content_delivery_date"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignLeft="@id/property_issue_pic_title"-->
-                <!--android:layout_alignStart="@id/property_issue_pic_title"-->
-                <!--android:layout_below="@id/property_issue_pic_title"-->
-                <!--android:text="@string/delivery_date_mock"-->
-                <!--android:textColor="@color/mainTextColor"-->
-                <!--android:textSize="14sp" />-->
+        </RelativeLayout>
 
-            </RelativeLayout>
-        </LinearLayout>
         <!-- request button -->
     </LinearLayout>
 </LinearLayout>
