@@ -19,6 +19,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.widget.MsgView;
 import com.ramotion.foldingcell.FoldingCell;
+import com.shanshui.smartcommunity.android.model.Topic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class NeighbourhoodFragment extends Fragment implements OnTabSelectListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_property, container, false);
+        FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_neighbourhood, container, false);
 
         ViewPager vp = frameLayout.findViewById(R.id.vp);
         List<ListView> listViews = new ArrayList();
@@ -85,7 +86,7 @@ public class NeighbourhoodFragment extends Fragment implements OnTabSelectListen
             ListAdapter adapter;
             if ("社区论坛".equals(this.subTabs[i])) {
                 listView = (ListView) inflater.inflate(R.layout.cell_fullscreen, frameLayout, false);
-                adapter = new CardListAdaptor(getContext(), TopicItem.mock());
+                adapter = new CardListAdaptor(getContext(), Topic.mock());
             } else if ("社区投票".equals(this.subTabs[i])) {
                 listView = (ListView) inflater.inflate(R.layout.cell_listview, frameLayout, false);
                 adapter = new VoteCardListAdapter(getContext(), VoteItem.mock());

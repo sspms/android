@@ -5,6 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.shanshui.smartcommunity.android.MainEntryActivityFragment"
-    tools:showIn="@layout/activity_main_entry">
-
-</android.support.constraint.ConstraintLayout>
+    tools:showIn="@layout/activity_main_entry"></android.support.constraint.ConstraintLayout>

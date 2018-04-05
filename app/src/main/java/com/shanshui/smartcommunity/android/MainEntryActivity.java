@@ -3,18 +3,16 @@ package com.shanshui.smartcommunity.android;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.shanshui.smartcommunity.android.util.WindowHelper;
+import com.shanshui.smartcommunity.android.view.NeighbourhoodPageFragment;
+import com.shanshui.smartcommunity.android.view.PropertyPageFragment;
 
 import java.util.ArrayList;
 
@@ -22,9 +20,10 @@ import static com.ashokvarma.bottomnavigation.BottomNavigationBar.BACKGROUND_STY
 import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_FIXED;
 
 public class MainEntryActivity extends AppCompatActivity
-        implements BottomNavigationBar.OnTabSelectedListener, NeighbourhoodFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener,
-        PropertyFragment.OnFragmentInteractionListener, MeFragment.OnFragmentInteractionListener, ShoppingFragment.OnFragmentInteractionListener,
-        ImageSwitcherFragment.OnFragmentInteractionListener {
+        implements BottomNavigationBar.OnTabSelectedListener, HomeFragment.OnFragmentInteractionListener,
+        MeFragment.OnFragmentInteractionListener, ShoppingFragment.OnFragmentInteractionListener,
+        ImageSwitcherFragment.OnFragmentInteractionListener, PropertyPageFragment.OnFragmentInteractionListener,
+        com.shanshui.smartcommunity.android.view.MyPropertyIssueFragment.OnFragmentInteractionListener {
     private BottomNavigationBar bottomNavigationBar;
     private ArrayList<Fragment> fragments;
     private ConstraintLayout frameLayout;
@@ -73,8 +72,8 @@ public class MainEntryActivity extends AppCompatActivity
 
         this.fragments = new ArrayList<>();
         fragments.add(hf);
-        fragments.add(PropertyFragment.newInstance("Property"));
-        fragments.add(NeighbourhoodFragment.newInstance("Neighbourhood"));
+        fragments.add(PropertyPageFragment.newInstance("Property"));
+        fragments.add(NeighbourhoodPageFragment.newInstance("Neighbourhood"));
         fragments.add(ShoppingFragment.newInstance("Shopping"));
         fragments.add(MeFragment.newInstance("Me"));
 
@@ -95,7 +94,7 @@ public class MainEntryActivity extends AppCompatActivity
                 .addItem(new BottomNavigationItem(R.drawable.ic_me, R.string.bottom_tab_me).setActiveColorResource(R.color.bottomItemSelected))
                 .setFirstSelectedPosition(0)
                 .initialise();
-        bottomNavigationBar.setAutoHideEnabled(false);
+        bottomNavigationBar.setAutoHideEnabled(true);
         bottomNavigationBar.setBackgroundStyle(BACKGROUND_STYLE_STATIC);
         bottomNavigationBar.setTabSelectedListener(this);
     }

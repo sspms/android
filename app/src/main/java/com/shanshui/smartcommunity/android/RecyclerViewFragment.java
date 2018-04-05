@@ -20,7 +20,6 @@ import butterknife.BindView;
 public class RecyclerViewFragment extends Fragment {
 
     private static final boolean GRID_LAYOUT = false;
-    private static final int ITEM_COUNT = 100;
     private final Object[] items = SellingItem.mock();
 
     @BindView(R.id.recyclerView)

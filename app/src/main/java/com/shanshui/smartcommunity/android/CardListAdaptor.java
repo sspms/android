@@ -3,12 +3,13 @@ package com.shanshui.smartcommunity.android;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.shanshui.smartcommunity.android.model.Topic;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ import java.util.List;
  * Created by I336253 on 2/24/2018.
  */
 
-public class CardListAdaptor extends ArrayAdapter<TopicItem> {
-    public CardListAdaptor(Context context, List<TopicItem> topics) {
+public class CardListAdaptor extends ArrayAdapter<Topic> {
+    public CardListAdaptor(Context context, List<Topic> topics) {
         super(context, 0, topics);
     }
 
@@ -46,14 +47,14 @@ public class CardListAdaptor extends ArrayAdapter<TopicItem> {
         return convertView;
     }
 
-    void bind(ViewHolder viewHolder, TopicItem item) {
+    void bind(ViewHolder viewHolder, Topic item) {
         if (item == null) {
             return;
         }
         viewHolder.watchView.setText(item.getWatch());
         viewHolder.viewedView.setText(item.getViewed());
         viewHolder.titleView.setText(item.getTitle());
-        viewHolder.authorView.setText(item.getAuthor());
+        viewHolder.authorView.setText(String.valueOf(item.getAuthor()));
         viewHolder.dateView.setText(item.getDate());
         viewHolder.commentView.setText(item.getComments());
     }
