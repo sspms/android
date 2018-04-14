@@ -1,10 +1,10 @@
 package com.shanshui.smartcommunity.android.repository;
 
 import android.arch.persistence.room.Room;
-import android.arch.persistence.room.TypeConverter;
 import android.content.Context;
+import android.util.Log;
 
-import java.util.Date;
+import com.shanshui.smartcommunity.android.util.LogHelper;
 
 /**
  * Created by I336253 on 4/1/2018.
@@ -17,8 +17,10 @@ public class DatabaseRepo {
         if (instance == null) {
             synchronized (DatabaseRepo.class) {
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context,
+                    Log.d(LogHelper.TAG, "start creating database instance");
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "shanshui.db").build();
+                    Log.d(LogHelper.TAG, "end creating database instance");
                 }
             }
         }

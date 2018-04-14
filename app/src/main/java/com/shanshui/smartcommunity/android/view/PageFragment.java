@@ -1,8 +1,11 @@
 package com.shanshui.smartcommunity.android.view;
 
+import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.shanshui.smartcommunity.android.R;
 import com.shanshui.smartcommunity.android.adaptor.FragmentListAdaptor;
+import com.shanshui.smartcommunity.android.util.LogHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +36,34 @@ public abstract class PageFragment extends Fragment implements OnTabSelectListen
 
     private OnFragmentInteractionListener mListener;
     protected SlidingTabLayout tabLayout;
+    private View progressBar;
 
-    protected ViewPager initViewPager(View parent) {
+    private ViewPager initViewPager(View parent) {
         ViewPager vp = parent.findViewById(R.id.vp);
-        List<Fragment> recyclerViewList = new ArrayList();
-        recyclerViewList.addAll(viewPagerFragments());
+        List<Fragment> fragments = viewPagerFragments();
 //        for (int i = 0; i < this.subTabs.length; i++) {
 //            MyPropertyIssueFragment fragment = MyPropertyIssueFragment.newInstance(this.subTabs[i]);
 //            recyclerViewList.add(fragment);
 //        }
 
-        vp.setAdapter(new FragmentListAdaptor(getChildFragmentManager(), recyclerViewList, tabTitles()));
-        vp.setOffscreenPageLimit(4);
-        vp.setCurrentItem(0);
+        vp.setAdapter(new FragmentListAdaptor(getChildFragmentManager(), fragments, tabTitles()));
+        vp.setOffscreenPageLimit(3);
+        int current = 0;
+        vp.setCurrentItem(current);
+
+        Fragment fragment = fragments.get(current);
+        if (fragment != null && fragment instanceof RecyclerViewFragment) {
+            RecyclerViewFragment.class.cast(fragment).setRecyclerViewReadyCallback(
+                    new RecyclerViewFragment.RecyclerViewReadyCallback() {
+                        @Override
+                        public void onLayoutReady() {
+                            if (progressBar != null) {
+                                progressBar.setVisibility(View.GONE);
+                                Log.i("PageFragment", "progress bar gone");
+                            }
+                        }
+                    });
+        }
         return vp;
     }
 
@@ -59,6 +79,8 @@ public abstract class PageFragment extends Fragment implements OnTabSelectListen
     @NonNull
     protected abstract List<Fragment> viewPagerFragments();
 
+    protected abstract void setToolbarImage(ImageView view);
+
     @NonNull
     protected abstract String[] tabTitles();
 
@@ -67,9 +89,13 @@ public abstract class PageFragment extends Fragment implements OnTabSelectListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d(LogHelper.TAG, "start creating view");
         FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_property, container, false);
-
+        setToolbarImage((ImageView) frameLayout.findViewById(R.id.toolbar_background_img));
+        this.progressBar = frameLayout.findViewById(R.id.progressBar);
+        Log.i("PageFragment", "progress bar inited");
         this.tabLayout = initTab(frameLayout, initViewPager(frameLayout), tabTitles());
+        Log.d(LogHelper.TAG, "end creating view");
         return frameLayout;
     }
 

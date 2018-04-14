@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.widget.ImageView;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.widget.MsgView;
@@ -59,7 +60,7 @@ public class NeighbourhoodPageFragment extends PageFragment {
         if (getArguments() != null) {
             name = getArguments().getString(ARG_NAME);
         }
-        prepareTestData();
+        //prepareTestData();
     }
 
     private void prepareTestData() {
@@ -98,7 +99,9 @@ public class NeighbourhoodPageFragment extends PageFragment {
 
         return fragments;
     }
-
+    protected void setToolbarImage(ImageView view) {
+        view.setImageResource(R.drawable.ic_home_header);
+    }
     @NonNull
     @Override
     protected String[] tabTitles() {

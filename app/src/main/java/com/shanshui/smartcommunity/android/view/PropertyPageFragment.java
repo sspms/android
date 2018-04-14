@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.widget.MsgView;
@@ -93,26 +94,26 @@ public class PropertyPageFragment extends PageFragment {
                     pi.setCategory("墙");
                     pi.setDescription("公司来电问，怎么回事？都三天了还不去弄（我这不是身体不舒服嘛，弄什么弄？你要快，你叫别人去）家里的龙眼熟了，回去摘些吃吃，宽带的事，明天再去……");
                     pi.setLocation("25栋201室");
-                    pi.setStatus("待评价");
+                    pi.setStatus("验收");
                     pi.setType("PUBLIC");
                     pi.setOpenDate(new Date());
                     PropertyIssue pii = new PropertyIssue(2L * (i + 1), 1L, 1L);
                     pii.setCategory("门");
                     pii.setDescription("昨夜睡的晚了，起床已经9点了，起来抽烟，喝茶，吃早餐，又中午了。看看外面的太阳……唉！！宽带的事，还是明天再去吧！");
                     pii.setLocation("西大门");
-                    pii.setStatus("待评价");
+                    pii.setStatus("维修");
                     pii.setOpenDate(new Date());
                     PropertyIssue piii = new PropertyIssue(3L * (i + 1), 1L, 1L);
                     piii.setCategory("游乐设施");
                     piii.setDescription("今天起来觉得身体不太对劲，有点累。有人拿两个主机来叫修修，唉……精神不好，你先放到墙角那里吧！宽带用户来电问，怎么还不来检查的？唉……身体不舒服，明天吧！");
                     piii.setLocation("地库");
-                    piii.setStatus("维修中");
+                    piii.setStatus("确认");
                     piii.setOpenDate(new Date());
                     PropertyIssue piiii = new PropertyIssue(4L * (i + 1), 1L, 2L);
                     piiii.setCategory("车位");
                     piiii.setDescription("昨夜喝了点酒，和一帮帅哥美女疯到半夜，今天起床晚了，头有点痛，休息一下，下午再去检查宽带，刚刚想去的，天又下雨了，唉……还是明天再去吧！");
                     piiii.setLocation("地库");
-                    piiii.setStatus("维修中");
+                    piiii.setStatus("报修");
                     piiii.setType("PUBLIC");
                     piiii.setOpenDate(new Date());
                     issues[4 * i] = pi;
@@ -142,6 +143,10 @@ public class PropertyPageFragment extends PageFragment {
         fragments.add(PublicPropertyIssueFragment.newInstance("物业报告", R.layout.fragment_my_property_issue));
 
         return fragments;
+    }
+
+    protected void setToolbarImage(ImageView view) {
+        view.setImageResource(R.drawable.property_header);
     }
 
     @Override

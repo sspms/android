@@ -41,6 +41,8 @@ public class PropertyIssue implements Roomable {
     private double estimatedCost;
     private String category;
     private String status;
+    @ColumnInfo(name = "order_status")
+    private String orderStatus;// open, canceled, re-opened, closed, pending-on-vote
     private String type;
     private long community;
     private long creator;
@@ -100,6 +102,14 @@ public class PropertyIssue implements Roomable {
 
     public long getAssignee() {
         return assignee;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public void setId(long id) {
@@ -165,37 +175,36 @@ public class PropertyIssue implements Roomable {
 
         PropertyIssue that = (PropertyIssue) o;
 
-        if (getCompleteDate() == null && getCompleteDate() != that.getCompleteDate()) {
-            return false;
-        }
-        if (getOpenDate() == null && getOpenDate() != that.getOpenDate()) {
-            return false;
-        }
-        if (getId() != that.getId()) return false;
         if (Double.compare(that.getEstimatedCost(), getEstimatedCost()) != 0) return false;
         if (getCommunity() != that.getCommunity()) return false;
         if (getCreator() != that.getCreator()) return false;
         if (getAssignee() != that.getAssignee()) return false;
-        if (!getOpenDate().equals(that.getOpenDate())) return false;
-        if (!getLastUpdateDate().equals(that.getLastUpdateDate())) return false;
-        if (!getCompleteDate().equals(that.getCompleteDate())) return false;
+        if (getOpenDate() != null ? !getOpenDate().equals(that.getOpenDate()) : that.getOpenDate() != null)
+            return false;
+        if (getLastUpdateDate() != null ? !getLastUpdateDate().equals(that.getLastUpdateDate()) : that.getLastUpdateDate() != null)
+            return false;
+        if (getCompleteDate() != null ? !getCompleteDate().equals(that.getCompleteDate()) : that.getCompleteDate() != null)
+            return false;
         if (!getDescription().equals(that.getDescription())) return false;
-        if (!getImageUrl().equals(that.getImageUrl())) return false;
+        if (getImageUrl() != null ? !getImageUrl().equals(that.getImageUrl()) : that.getImageUrl() != null)
+            return false;
+        if (getType() != null ? !getType().equals(that.getType()) : that.getType() != null)
+            return false;
+        if (!getLocation().equals(that.getLocation())) return false;
         if (!getCategory().equals(that.getCategory())) return false;
-        if (!getStatus().equals(that.getStatus())) return false;
-        return getType().equals(that.getType());
+        return getStatus().equals(that.getStatus());
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getOpenDate().hashCode();
-        result = 31 * result + getLastUpdateDate().hashCode();
-        result = 31 * result + getCompleteDate().hashCode();
+        result = getOpenDate() != null ? getOpenDate().hashCode() : 0;
+        result = 31 * result + (getLastUpdateDate() != null ? getLastUpdateDate().hashCode() : 0);
+        result = 31 * result + (getCompleteDate() != null ? getCompleteDate().hashCode() : 0);
         result = 31 * result + getDescription().hashCode();
-        result = 31 * result + getImageUrl().hashCode();
+        result = 31 * result + (getImageUrl() != null ? getImageUrl().hashCode() : 0);
+        result = 31 * result + getLocation().hashCode();
         temp = Double.doubleToLongBits(getEstimatedCost());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + getCategory().hashCode();

@@ -1,5 +1,6 @@
 package com.shanshui.smartcommunity.android.adaptor;
 
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.ramotion.foldingcell.FoldingCell;

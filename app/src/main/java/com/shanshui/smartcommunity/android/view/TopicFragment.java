@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.shanshui.smartcommunity.android.R;
@@ -12,6 +13,7 @@ import com.shanshui.smartcommunity.android.adaptor.VoteAdaptor;
 import com.shanshui.smartcommunity.android.model.Topic;
 import com.shanshui.smartcommunity.android.model.Vote;
 import com.shanshui.smartcommunity.android.repository.DatabaseRepo;
+import com.shanshui.smartcommunity.android.util.LogHelper;
 import com.shanshui.smartcommunity.android.viewmodel.TopicViewModel;
 import com.shanshui.smartcommunity.android.viewmodel.VoteViewModel;
 
@@ -60,12 +62,14 @@ public class TopicFragment extends RecyclerViewFragment<Topic, TopicViewModel, T
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(LogHelper.TAG, "start creating topic fragment");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             name = getArguments().getString(ARG_NAME);
         }
         this.viewModel = ViewModelProviders.of(this).get(TopicViewModel.class);
         this.viewModel.setup(DatabaseRepo.newInstance(getContext()).topicDao());
+        Log.d(LogHelper.TAG, "end creating topic fragment");
     }
 
 }

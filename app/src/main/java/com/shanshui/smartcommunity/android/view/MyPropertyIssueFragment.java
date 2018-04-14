@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.shanshui.smartcommunity.android.R;
 import com.shanshui.smartcommunity.android.adaptor.PropertyIssueAdaptor;
 import com.shanshui.smartcommunity.android.repository.DatabaseRepo;
+import com.shanshui.smartcommunity.android.util.LogHelper;
 import com.shanshui.smartcommunity.android.viewmodel.MyPropertyIssueViewModel;
 
 /**
@@ -28,16 +30,6 @@ public class MyPropertyIssueFragment extends PropertyIssueFragment<MyPropertyIss
     public MyPropertyIssueFragment() {
         super();
         // Required empty public constructor
-    }
-
-    @Override
-    protected RecyclerView onCreateRecyclerView(View fragmentLayout) {
-        return fragmentLayout.findViewById(R.id.property_issue_recycler_view);
-    }
-
-    @Override
-    protected PropertyIssueAdaptor getRecyclerViewAdaptor() {
-        return new PropertyIssueAdaptor(getContext());
     }
 
     /**
@@ -58,6 +50,7 @@ public class MyPropertyIssueFragment extends PropertyIssueFragment<MyPropertyIss
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(LogHelper.TAG, "start creating my property issue fragment");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             name = getArguments().getString(ARG_NAME);
@@ -66,5 +59,6 @@ public class MyPropertyIssueFragment extends PropertyIssueFragment<MyPropertyIss
         long id = 1L;//preferences.getLong("id", 0L);
         this.viewModel = ViewModelProviders.of(this).get(MyPropertyIssueViewModel.class);
         this.viewModel.setup(id, DatabaseRepo.newInstance(getContext()).propertyIssueDao());
+        Log.d(LogHelper.TAG, "end creating my property issue fragment");
     }
 }

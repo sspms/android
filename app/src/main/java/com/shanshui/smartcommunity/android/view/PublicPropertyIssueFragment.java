@@ -3,8 +3,10 @@ package com.shanshui.smartcommunity.android.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.shanshui.smartcommunity.android.repository.DatabaseRepo;
+import com.shanshui.smartcommunity.android.util.LogHelper;
 import com.shanshui.smartcommunity.android.viewmodel.PublicPropertyIssueViewModel;
 
 /**
@@ -18,6 +20,7 @@ import com.shanshui.smartcommunity.android.viewmodel.PublicPropertyIssueViewMode
 public class PublicPropertyIssueFragment extends PropertyIssueFragment<PublicPropertyIssueViewModel> {
     private static final String ARG_NAME = "ARG_NAME";
     private String name;
+
     public PublicPropertyIssueFragment() {
         super();
     }
@@ -40,11 +43,13 @@ public class PublicPropertyIssueFragment extends PropertyIssueFragment<PublicPro
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(LogHelper.TAG, "start creating public property issue fragment");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             name = getArguments().getString(ARG_NAME);
         }
         this.viewModel = ViewModelProviders.of(this).get(PublicPropertyIssueViewModel.class);
         this.viewModel.setup(DatabaseRepo.newInstance(getContext()).propertyIssueDao());
+        Log.d(LogHelper.TAG, "end creating public property issue fragment");
     }
 }
