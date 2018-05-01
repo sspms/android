@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgContent"
+    android:baselineAligned="false">
+
+    <TextView
+        android:id="@+id/title_property_issue_days_passed"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/bgTitleLeft"
+        android:gravity="center"
+        android:text="三天前"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/title_property_issue_loc"
+        style="@style/TitleBadgeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_location"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:singleLine="true"
+        android:text="西大门"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/title_property_issue_days_passed"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/title_from_to_dots_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:src="@color/contentDividerLine"
+        app:layout_constraintLeft_toLeftOf="@+id/title_property_issue_loc"
+        app:layout_constraintRight_toRightOf="@+id/title_property_issue_status"
+        app:layout_constraintTop_toBottomOf="@+id/title_property_issue_loc" />
+
+    <TextView
+        android:id="@+id/title_property_issue_status"
+        style="@style/TitleBadgeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="已提交"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TitleBadgeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/property_issue_status"
+        app:layout_constraintRight_toRightOf="@+id/title_property_issue_status"
+        app:layout_constraintTop_toBottomOf="@+id/title_from_to_dots_divider" />
+
+    <ImageView
+        android:id="@+id/title_weight"
+        style="@style/TitleBadgeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/title_property_issue_status"
+        app:layout_constraintLeft_toLeftOf="@+id/title_property_issue_loc"
+        app:layout_constraintLeft_toRightOf="@+id/title_property_issue_days_passed"
+        app:srcCompat="@drawable/stars" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/title_weight"-->
+    <!--style="@style/TitleBadgeText"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:text="@string/weight_mock" />-->
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TitleBadgeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/property_issue_rating"
+        app:layout_constraintLeft_toLeftOf="@+id/title_property_issue_loc"
+        app:layout_constraintLeft_toRightOf="@+id/title_property_issue_days_passed"
+        app:layout_constraintTop_toBottomOf="@+id/title_from_to_dots_divider" />
+
+    <TextView
+        android:id="@+id/title_property_issue_category"
+        style="@style/TitleBadgeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="门"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/title_property_issue_status"
+        app:layout_constraintLeft_toLeftOf="@+id/title_property_issue_loc"
+        app:layout_constraintRight_toLeftOf="@+id/title_property_issue_status" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TitleBadgeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/property_issue_category"
+        app:layout_constraintLeft_toLeftOf="@+id/title_property_issue_loc"
+        app:layout_constraintLeft_toRightOf="@+id/textView2"
+        app:layout_constraintRight_toLeftOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/title_from_to_dots_divider" />
+
+</android.support.constraint.ConstraintLayout>

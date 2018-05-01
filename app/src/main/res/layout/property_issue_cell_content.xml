@@ -61,6 +61,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:clickable="true"
                 android:src="@drawable/menu_icon" />
         </RelativeLayout>
 
@@ -202,47 +203,17 @@
 
         </LinearLayout>
 
-        <!-- divider line -->
-        <ImageView
+        <TextView
+            android:id="@+id/property_detail"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="7dp"
-            android:src="@color/contentDividerLine" />
-
-        <!-- dates part -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/property_issue_pic_title"
-                style="@style/ContentMainBadgeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:text="图片"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:layout_below="@+id/property_issue_pic_title"
-                app:srcCompat="@drawable/ic_cover_4" />
-            <!--<TextView-->
-            <!--android:id="@+id/content_delivery_date"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignLeft="@id/property_issue_pic_title"-->
-            <!--android:layout_alignStart="@id/property_issue_pic_title"-->
-            <!--android:layout_below="@id/property_issue_pic_title"-->
-            <!--android:text="@string/delivery_date_mock"-->
-            <!--android:textColor="@color/mainTextColor"-->
-            <!--android:textSize="14sp" />-->
-
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/bgContentTop"
+            android:padding="10dp"
+            android:text="详细"
+            android:textAlignment="center"
+            android:textColor="@color/mainTextColor"
+            android:textSize="20sp" />
 
         <!-- request button -->
     </LinearLayout>

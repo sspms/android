@@ -72,15 +72,6 @@ public abstract class RecyclerViewFragment<RM extends Roomable, VM extends ViewM
         //recyclerView.setDrawingCacheEnabled(true);
         //recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
-        recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (recyclerViewReadyCallback != null) {
-                    //recyclerViewReadyCallback.onLayoutReady();
-                }
-                recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
         final AD adapter = getRecyclerViewAdaptor();
         adapter.setHasStableIds(true); // for better performance
         this.viewModel.getData().observe(this, new Observer<PagedList<RM>>() {
@@ -98,57 +89,6 @@ public abstract class RecyclerViewFragment<RM extends Roomable, VM extends ViewM
 
         recyclerView.setAdapter(adapter);
 
-        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        //final FoldingCellListAdapter adapter = new FoldingCellListAdapter(getContext(), items);
-
-//        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            private GestureDetectorCompat gestureDetectorCompat = new GestureDetectorCompat(getContext(),
-//                    new GestureDetector.SimpleOnGestureListener() {
-//                        @Override
-//                        public boolean onSingleTapUp(MotionEvent e) {
-//                            View view = recyclerView.findChildViewUnder(e.getX(), e.getY());
-//                            if (view != null && View.VISIBLE == view.getVisibility()) {
-//                                RecyclerView.ViewHolder VH = recyclerView.getChildViewHolder(view);
-//                                onItemClick(VH);
-//                            }
-//                            return true;
-//                        }
-//
-//                        @Override
-//                        public void onLongPress(MotionEvent e) {
-////                            View view = recyclerView.findChildViewUnder(e.getX(), e.getY());
-////                            if (view != null) {
-////                                RecyclerView.ViewHolder VH = recyclerView.getChildViewHolder(view);
-////                                onItemClick(VH);
-////                            }
-//                        }
-//
-//                        private void onItemClick(RecyclerView.ViewHolder viewHolder) {
-//                            if (viewHolder instanceof FoldingCellViewHolder) {
-//                                final FoldingCell fc = FoldingCellViewHolder.class.cast(viewHolder).getFoldingCell();
-//                                fc.toggle(false);
-//                            }
-//                        }
-//                    });
-//
-//            @Override
-//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-//                onTouchEvent(rv, e);
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-//                if (gestureDetectorCompat != null) {
-//                    gestureDetectorCompat.onTouchEvent(e);
-//                }
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//
-//            }
-//        });
         Log.d(LogHelper.TAG, "end creating recycler view");
         return layout;
     }

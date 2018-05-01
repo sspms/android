@@ -1,6 +1,7 @@
 package com.shanshui.smartcommunity.android.adaptor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -22,10 +24,12 @@ import com.shanshui.smartcommunity.android.model.PropertyIssue;
 import com.shanshui.smartcommunity.android.repository.DatabaseRepo;
 import com.shanshui.smartcommunity.android.util.DateHelper;
 import com.shanshui.smartcommunity.android.util.LogHelper;
+import com.shanshui.smartcommunity.android.view.PropertyIssueDetailActivity;
 import com.shanshui.smartcommunity.android.view.PropertyIssuePopupMenu;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -33,22 +37,13 @@ import java.util.List;
  */
 
 public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, PropertyIssueAdaptor.ViewHolder> {
-    public final static String[] STEPS = new String[]{"报修", "确认", "维修", "验收", "评价"};
 
     private Context context;
+    private HashSet unfolded = new HashSet();
 
     public PropertyIssueAdaptor(Context context) {
         super();
         this.context = context.getApplicationContext();
-    }
-
-    private String nextStep(@NonNull String current) {
-        List<String> s = Arrays.asList(STEPS);
-        int pos = s.indexOf(current);
-        if (pos < s.size() - 1) {
-            return STEPS[pos + 1];
-        }
-        return current;
     }
 
     @NonNull
@@ -64,17 +59,44 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
 
     @Override
     void postBinding(final ViewHolder holder, final PropertyIssue instance, final int position) {
-//        holder.menu.setOnTouchListener(new View.OnTouchListener() {
-//
+        final FoldingCell fc = holder.getFoldingCell();
+
+        fc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fc != null) {
+                    if (unfolded.contains(position)) {
+                        unfolded.remove(position);
+                    }
+                    fc.toggle(false);
+                    if (fc.isUnfolded()) {
+                        unfolded.add(position);
+                    }
+                }
+            }
+        });
+//        fc.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 //            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                Intent intent = new Intent(context, MenuActivity.class);
-//                context.startActivity(intent);
-//                Log.d(LogHelper.TAG, "menu clicked on issue " + position);
-//                // consume the event, stop parent consuming it again.
-//                return true;
+//            public void onGlobalLayout() {
+//                if (unfolded.contains(position)) {
+//                    if (!fc.isUnfolded()) {
+//                        fc.unfold(true);
+//                    }
+//                }
 //            }
 //        });
+        holder.detail.setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = PropertyIssueDetailActivity.newIntent(context, instance.getId(), instance.getStatus());
+                        context.startActivity(intent);
+                        Log.d(LogHelper.TAG, "property issue detail button clicked on " + instance.getId());
+                    }
+                }
+        );
         holder.menu.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -99,7 +121,7 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
                                 new PropertyIssuePopupMenu.OnMenuClick() {
                                     @Override
                                     public void OnClick(final PropertyIssue propertyIssue) {
-                                        final String next = nextStep(propertyIssue.getStatus());
+                                        final String next = PropertyIssue.nextStep(propertyIssue.getStatus());
                                         if (!next.equals(propertyIssue.getStatus())) {
                                             new AsyncTask<Void, Void, Void>() {
 
@@ -124,12 +146,12 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
                                 new PropertyIssuePopupMenu.OnMenuClick() {
                                     @Override
                                     public void OnClick(final PropertyIssue propertyIssue) {
-                                        if (STEPS[2].equals(propertyIssue.getStatus())) {
+                                        if (PropertyIssue.STEPS[2].equals(propertyIssue.getStatus())) {
                                             new AsyncTask<Void, Void, Void>() {
 
                                                 @Override
                                                 protected Void doInBackground(Void... voids) {
-                                                    propertyIssue.setStatus(STEPS[0]);
+                                                    propertyIssue.setStatus(PropertyIssue.STEPS[0]);
                                                     int count = DatabaseRepo.newInstance(context).propertyIssueDao().update(propertyIssue);
                                                     Log.d(LogHelper.TAG, "update db done, updated row " + count);
                                                     return null;
@@ -139,14 +161,6 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
                                     }
                                 })};
                 PropertyIssuePopupMenu piMenu = new PropertyIssuePopupMenu(context, holder.menu, items);
-//                PopupMenu popupMenu = new PopupMenu(context, holder.menu);
-//                Menu items = popupMenu.getMenu();
-//                String[] menus = {"留言", "取消", "完成", "修改", "评价"};
-//                int size = menus.length;
-//                for (int i = 0; i < size; i++) {
-//                    items.add(android.view.Menu.NONE, android.view.Menu.FIRST + i, i, menus[i]);
-//                    //items.addSubMenu(menus[i]);
-//                }
 
                 piMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -178,6 +192,8 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
         private TextView titleIssueCurrentStatus;
         private TextView titleIssueLocation;
         private ImageView menu;
+        private TextView detail;
+        private boolean folded = true;
 
         public ViewHolder(final Context context, View itemView) {
             super(itemView);
@@ -194,64 +210,8 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
                         .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(context, R.drawable.complted))//设置StepsViewIndicator CompleteIcon
                         .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(context, R.drawable.default_icon))//设置StepsViewIndicator DefaultIcon
                         .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(context, R.drawable.attention));
-//                        .setStepsViewStepsClickListener(new HorizontalStepsViewIndicator.OnItemClickListener() {
-//                            @Override
-//                            public void onClick(MotionEvent event, final int item) {
-//
-//                                GestureDetectorCompat gestureDetectorCompat = new GestureDetectorCompat(context.getApplicationContext(),
-//                                        new GestureDetector.SimpleOnGestureListener() {
-//                                            @Override
-//                                            public boolean onSingleTapUp(MotionEvent e) {
-//                                                new AsyncTask<Void, Void, Void>() {
-//
-//                                                    @Override
-//                                                    protected Void doInBackground(Void... voids) {
-//                                                        if (item == stepIndex + 1 && item < steps.length) {
-//                                                            PropertyIssue issue = getItem();
-//                                                            if (issue != null) {
-//                                                                String status = steps[item < steps.length - 1 ? item : steps.length - 1];
-//
-//                                                                if (!status.equals(issue.getStatus())) {
-//                                                                    issue.setStatus(status);
-//                                                                    int count = DatabaseRepo.newInstance(context).propertyIssueDao().update(issue);
-//                                                                    Log.d(LogHelper.TAG, "update db done, updated row " + count);
-//                                                                }
-//                                                            }
-//                                                        }
-//                                                        return null;
-//                                                    }
-//                                                }.execute();
-//
-//                                                Log.i(LogHelper.TAG, "step view clicked on item " + item);
-//
-//                                                return true;
-//                                            }
-//                                        });
-//                                gestureDetectorCompat.onTouchEvent(event);
-//                                new AsyncTask<Void, Void, Void>() {
-//
-//                                    @Override
-//                                    protected Void doInBackground(Void... voids) {
-//                                        if (item == stepIndex + 1 && item < steps.length) {
-//                                            PropertyIssue issue = getItem();
-//                                            if (issue != null) {
-//                                                String status = steps[item < steps.length - 1 ? item : steps.length - 1];
-//
-//                                                if (!status.equals(issue.getStatus())) {
-//                                                    issue.setStatus(status);
-//                                                    int count = DatabaseRepo.newInstance(context).propertyIssueDao().update(issue);
-//                                                    Log.d(LogHelper.TAG, "update db done, updated row " + count);
-//                                                }
-//                                            }
-//                                        }
-//                                        return null;
-//                                    }
-//                                }.execute();
-//
-//                                Log.i(LogHelper.TAG, "step view clicked on item " + item);
-//                            }
-//                        });//设置StepsViewIndicator AttentionIcon
                 menu = foldingCell.findViewById(R.id.property_issue_menu);
+                detail = foldingCell.findViewById(R.id.property_detail);
                 orderId = foldingCell.findViewById(R.id.property_issue_id);
                 issueLocation = foldingCell.findViewById(R.id.title_property_issue_loc);
                 issueReportedDate = foldingCell.findViewById(R.id.title_property_issue_days_passed);
@@ -272,16 +232,7 @@ public class PropertyIssueAdaptor extends PagedListAdapterBase<PropertyIssue, Pr
         void bindTo(final PropertyIssue instance, final int position) {
             super.bindTo(instance, position);
 
-            foldingCell.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final FoldingCell fc = getFoldingCell();
-                    if (fc != null) {
-                        fc.toggle(false);
-                    }
-                }
-            });
-            StepPathBuilder builder = new StepPathBuilder().steps(STEPS);
+            StepPathBuilder builder = new StepPathBuilder().steps(PropertyIssue.STEPS);
 
             switch (instance.getStatus()) {
                 case "评价":

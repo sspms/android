@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shanshui.smartcommunity.android.model.PropertyIssue" />
+
+        <import type="com.shanshui.smartcommunity.android.util.DateHelper" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.shanshui.smartcommunity.android.view.PropertyIssueDetailActivity">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bgTitleLeft"
+                android:fitsSystemWindows="true">
+
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:expandedTitleMarginEnd="64dp"
+                    app:expandedTitleMarginStart="48dp"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <com.baoyachi.stepview.HorizontalStepView
+                            android:id="@+id/property_issue_step_view"
+                            style="@style/TitleBadgeText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="?attr/actionBarSize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/bgContentTop"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/back_entry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:srcCompat="@drawable/abc_ic_ab_back_material" />
+
+                            <TextView
+                                android:id="@+id/property_issue_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewModel.title}"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/menu_entry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:srcCompat="@drawable/ic_menu_overflow_material" />
+                        </android.support.constraint.ConstraintLayout>
+                    </android.support.v7.widget.Toolbar>
+                </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:fillViewport="true"
+                android:fitsSystemWindows="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <android.support.constraint.ConstraintLayout
+                    style="@style/PropertyIssueDetailHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/title_property_issue_loc"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="地点"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/property_issue_loc"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_location"
+                        android:ellipsize="marquee"
+                        android:fadingEdge="horizontal"
+                        android:singleLine="true"
+                        android:text="@{viewModel.location}"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/title_property_issue_loc"
+                        app:layout_constraintLeft_toRightOf="@+id/title_property_issue_loc"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/title_property_issue_status"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewModel.status}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title_property_issue_loc" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/property_issue_status"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/title_property_issue_status"
+                        app:layout_constraintRight_toLeftOf="@+id/title_property_issue_status" />
+
+                    <ImageView
+                        android:id="@+id/title_weight"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/stars" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/property_issue_rating"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/property_issue_loc"
+                        app:layout_constraintRight_toLeftOf="@+id/title_weight" />
+
+                    <TextView
+                        android:id="@+id/title_property_issue_category"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="@{viewModel.category}"
+                        app:layout_constraintLeft_toRightOf="@+id/textView3"
+                        app:layout_constraintTop_toBottomOf="@+id/property_issue_loc" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/property_issue_category"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_issue_loc" />
+
+                    <ImageView
+                        android:id="@+id/devider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="9dp"
+                        android:src="@color/contentDividerLine"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title_property_issue_category" />
+
+                    <TextView
+                        android:id="@+id/content_avatar_title"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:text="报修人"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/devider" />
+
+                    <ImageView
+                        android:id="@+id/content_avatar"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_below="@id/content_avatar_title"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/avatar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/content_avatar_title" />
+
+                    <TextView
+                        android:id="@+id/content_name_view"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/content_avatar"
+                        android:layout_toEndOf="@id/content_avatar"
+                        android:layout_toRightOf="@id/content_avatar"
+                        android:text="天使爱美丽"
+                        app:layout_constraintLeft_toRightOf="@+id/content_avatar"
+                        app:layout_constraintTop_toBottomOf="@+id/content_avatar_title" />
+
+                    <TextView
+                        android:id="@+id/user_profile_integration_title"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/content_name_view"
+                        android:layout_alignStart="@id/content_name_view"
+                        android:layout_below="@id/content_name_view"
+                        android:text="积分:"
+                        app:layout_constraintBottom_toBottomOf="@+id/content_avatar"
+                        app:layout_constraintLeft_toRightOf="@+id/content_avatar" />
+
+                    <TextView
+                        android:id="@+id/user_profile_integration"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/content_name_view"
+                        android:layout_toEndOf="@id/user_profile_integration_title"
+                        android:layout_toRightOf="@id/user_profile_integration_title"
+                        android:text="246"
+                        app:layout_constraintBottom_toBottomOf="@+id/content_avatar"
+                        app:layout_constraintLeft_toRightOf="@+id/user_profile_integration_title" />
+
+                    <TextView
+                        android:id="@+id/vote_start_date_title"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:text="日期"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/content_avatar_title"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/property_issue_datatime"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/content_avatar"
+                        android:layout_alignEnd="@id/vote_start_date_title"
+                        android:layout_alignRight="@id/content_name_view"
+                        android:layout_below="@id/vote_start_date_title"
+                        android:gravity="bottom"
+                        android:text="@{DateHelper.toChineseTimeZone(viewModel.openDate)}"
+                        app:layout_constraintBottom_toBottomOf="@+id/content_avatar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/vote_start_date_title" />
+
+                    <ImageView
+                        android:id="@+id/devider_desp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="9dp"
+                        android:src="@color/contentDividerLine"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/content_avatar" />
+
+                    <TextView
+                        android:id="@+id/property_issue_description_title"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="描述"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/devider_desp" />
+
+                    <TextView
+                        android:id="@+id/property_issue_description"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.description}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_issue_description_title" />
+
+                    <TextView
+                        android:id="@+id/property_issue_pic_title"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="图片"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_issue_description" />
+
+                    <ImageView
+                        android:id="@+id/devider_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="9dp"
+                        android:src="@color/contentDividerLine"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_issue_pic_title" />
+
+                    <TextView
+                        android:id="@+id/property_issue_comments_title"
+                        style="@style/PropertyIssueDetailHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="评论"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/devider_comments" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/property_issue_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_issue_comments_title">
+
+                    </android.support.v7.widget.RecyclerView>
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
+        </android.support.design.widget.CoordinatorLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

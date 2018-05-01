@@ -16,6 +16,6 @@
     <include layout="@layout/property_issue_cell_content" />
 
     <!-- TITLE (FOLDED) LAYOUT (MUST BE AT LEAST 2x times SMALLER than content layout above) -->
-    <include layout="@layout/property_issue_cell_title" />
+    <include layout="@layout/property_issue_cell_title2" />
 
 </com.ramotion.foldingcell.FoldingCell>

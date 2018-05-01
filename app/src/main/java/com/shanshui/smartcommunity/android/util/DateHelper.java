@@ -1,5 +1,6 @@
 package com.shanshui.smartcommunity.android.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -7,6 +8,11 @@ import java.util.Date;
  */
 
 public class DateHelper {
+    public static String toChineseTimeZone(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        return sdf.format(date);
+    }
+
     public static String diff(Date one, Date two) {
         String unit = "天前";
         int dd = diffDay(one, two);

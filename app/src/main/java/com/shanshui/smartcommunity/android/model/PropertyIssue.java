@@ -1,24 +1,38 @@
 package com.shanshui.smartcommunity.android.model;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * property issue class, property owner files a ticket for this kind of issue for property service
  * provider.
  */
 
-@Entity(indices = {@Index("community"), @Index("creator"), @Index("type"), @Index("assignee")},
+@Entity(indices = {@Index("community"), @Index("user_id"), @Index("type"), @Index("assignee")},
         foreignKeys = {@ForeignKey(entity = Community.class, parentColumns = "id", childColumns = "community")})
 public class PropertyIssue implements Roomable {
 
-    public PropertyIssue(long id, long community, long creator) {
+    public final static String[] STEPS = new String[]{"报修", "确认", "维修", "验收", "评价"};
+
+    public static String nextStep(@NonNull String current){
+        List<String> s = Arrays.asList(STEPS);
+        int pos = s.indexOf(current);
+        if (pos < s.size() - 1) {
+            return STEPS[pos + 1];
+        }
+        return current;
+    }
+    public PropertyIssue(String title, long id, long community, User creator) {
+        this.title = title;
         this.id = id;
         this.community = community;
         this.creator = creator;
@@ -26,13 +40,14 @@ public class PropertyIssue implements Roomable {
 
     @PrimaryKey
     @NonNull
-    private long id;
+    private long id = 0;
     @ColumnInfo(name = "open_date")
     private Date openDate;
     @ColumnInfo(name = "last_update_date")
     private Date lastUpdateDate;
     @ColumnInfo(name = "complete_date")
     private Date completeDate;
+    private String title;
     private String description;
     @ColumnInfo(name = "image_url")
     private String imageUrl;
@@ -42,10 +57,11 @@ public class PropertyIssue implements Roomable {
     private String category;
     private String status;
     @ColumnInfo(name = "order_status")
-    private String orderStatus;// open, canceled, re-opened, closed, pending-on-vote
-    private String type;
+    private String orderStatus = "open";// open, canceled, re-opened, closed, pending-on-vote
+    private String type = "PUBLIC";
     private long community;
-    private long creator;
+    @Embedded
+    private User creator;
     private long assignee;
 
     public long getId() {
@@ -96,7 +112,7 @@ public class PropertyIssue implements Roomable {
         return community;
     }
 
-    public long getCreator() {
+    public User getCreator() {
         return creator;
     }
 
@@ -106,6 +122,14 @@ public class PropertyIssue implements Roomable {
 
     public String getOrderStatus() {
         return orderStatus;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setOrderStatus(String orderStatus) {
@@ -160,7 +184,7 @@ public class PropertyIssue implements Roomable {
         this.community = community;
     }
 
-    public void setCreator(long creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
@@ -177,7 +201,6 @@ public class PropertyIssue implements Roomable {
 
         if (Double.compare(that.getEstimatedCost(), getEstimatedCost()) != 0) return false;
         if (getCommunity() != that.getCommunity()) return false;
-        if (getCreator() != that.getCreator()) return false;
         if (getAssignee() != that.getAssignee()) return false;
         if (getOpenDate() != null ? !getOpenDate().equals(that.getOpenDate()) : that.getOpenDate() != null)
             return false;
@@ -185,14 +208,16 @@ public class PropertyIssue implements Roomable {
             return false;
         if (getCompleteDate() != null ? !getCompleteDate().equals(that.getCompleteDate()) : that.getCompleteDate() != null)
             return false;
+        if (!getTitle().equals(that.getTitle())) return false;
         if (!getDescription().equals(that.getDescription())) return false;
         if (getImageUrl() != null ? !getImageUrl().equals(that.getImageUrl()) : that.getImageUrl() != null)
             return false;
-        if (getType() != null ? !getType().equals(that.getType()) : that.getType() != null)
-            return false;
         if (!getLocation().equals(that.getLocation())) return false;
         if (!getCategory().equals(that.getCategory())) return false;
-        return getStatus().equals(that.getStatus());
+        if (!getStatus().equals(that.getStatus())) return false;
+        if (!getOrderStatus().equals(that.getOrderStatus())) return false;
+        if (!getType().equals(that.getType())) return false;
+        return getCreator().equals(that.getCreator());
     }
 
     @Override
@@ -202,6 +227,7 @@ public class PropertyIssue implements Roomable {
         result = getOpenDate() != null ? getOpenDate().hashCode() : 0;
         result = 31 * result + (getLastUpdateDate() != null ? getLastUpdateDate().hashCode() : 0);
         result = 31 * result + (getCompleteDate() != null ? getCompleteDate().hashCode() : 0);
+        result = 31 * result + getTitle().hashCode();
         result = 31 * result + getDescription().hashCode();
         result = 31 * result + (getImageUrl() != null ? getImageUrl().hashCode() : 0);
         result = 31 * result + getLocation().hashCode();
@@ -209,9 +235,10 @@ public class PropertyIssue implements Roomable {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + getCategory().hashCode();
         result = 31 * result + getStatus().hashCode();
+        result = 31 * result + getOrderStatus().hashCode();
         result = 31 * result + getType().hashCode();
         result = 31 * result + (int) (getCommunity() ^ (getCommunity() >>> 32));
-        result = 31 * result + (int) (getCreator() ^ (getCreator() >>> 32));
+        result = 31 * result + getCreator().hashCode();
         result = 31 * result + (int) (getAssignee() ^ (getAssignee() >>> 32));
         return result;
     }

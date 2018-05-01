@@ -1,4 +1,4 @@
-package com.shanshui.smartcommunity.android;
+package com.shanshui.smartcommunity.android.adaptor;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import com.shanshui.smartcommunity.android.R;
 
 import java.util.List;
 import java.util.Map;
@@ -60,6 +62,10 @@ public class GridViewColorAdaptor extends SimpleAdapter {
                     backgroundColor[position % (row * column)]));
 
             holder.icon.setBackground(drawable);
+            View.OnClickListener handler = (View.OnClickListener) data.get(position).get("event");
+            if (0 == position && handler != null) {
+                holder.icon.setOnClickListener(handler);
+            }
             this.currentPos = position;
             return convertView;
         }

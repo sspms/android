@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="property_issue_category">
+        <item>门</item>
+        <item>窗户</item>
+        <item>电力</item>
+        <item>自来水</item>
+        <item>天然气</item>
+        <item>电灯</item>
+        <item>排水</item>
+        <item>电梯</item>
+        <item>楼梯</item>
+        <item>绿化</item>
+        <item>健身器材</item>
+        <item>儿童设施</item>
+        <item>步道</item>
+        <item>车库</item>
+        <item>锁</item>
+        <item>摄像头</item>
+        <item>大路</item>
+        <item>其他</item>
+    </string-array>
+</resources>

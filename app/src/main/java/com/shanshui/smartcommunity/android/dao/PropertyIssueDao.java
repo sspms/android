@@ -32,13 +32,16 @@ public interface PropertyIssueDao extends DaoBase<PropertyIssue> {
     @Query("SELECT * FROM PropertyIssue where id = :id")
     PropertyIssue[] find(long... id);
 
-    @Query("select * from PropertyIssue where creator = :id")
+    @Query("SELECT * FROM PropertyIssue where id = :id")
+    LiveData<PropertyIssue> findLiveData(long id);
+
+    @Query("select * from PropertyIssue where user_id = :id")
     PropertyIssue[] findMine(long id);
 
-    @Query("select * from PropertyIssue where creator = :id")
+    @Query("select * from PropertyIssue where user_id = :id")
     LiveData<List<PropertyIssue>> findMineLiveData(long id);
 
-    @Query("select * from PropertyIssue where creator = :id")
+    @Query("select * from PropertyIssue where user_id = :id")
     DataSource.Factory<Integer, PropertyIssue> pagingMine(long id);
 
     @Query("select * from PropertyIssue where type = :type")

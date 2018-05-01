@@ -1,11 +1,17 @@
 package com.shanshui.smartcommunity.android.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.view.ActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import com.shanshui.smartcommunity.android.R;
 import com.shanshui.smartcommunity.android.model.PropertyIssue;
 
 import java.util.List;
@@ -22,9 +28,14 @@ public class PropertyIssuePopupMenu extends PopupMenu {
         this.menuItems = menuItems;
         if (this.menuItems != null) {
             int size = this.menuItems.length;
+            Menu menu = getMenu();
             for (int i = 0; i < size; i++) {
-                Menu menu = getMenu();
-                menu.add(android.view.Menu.NONE, android.view.Menu.FIRST + i, i, menuItems[i].title);
+                // something like the html markup...
+                SpannableStringBuilder builder = new SpannableStringBuilder(menuItems[i].title);
+                ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.BLACK);
+                builder.setSpan(colorSpan, 0, menuItems[i].title.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+                menu.add(Menu.NONE, Menu.FIRST + i, i, builder);
             }
         }
     }

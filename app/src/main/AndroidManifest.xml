@@ -42,10 +42,12 @@
         <activity
             android:name=".MainEntryActivity"
             android:label="@string/title_activity_main_entry"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />TranslucentTheme
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".view.PropertyIssueDetailActivity" />
         <activity
-            android:name=".view.MenuActivity"
-            android:theme="@style/TranslucentTheme"></activity>
+            android:name=".view.PropertyIssueSubmitActivity"
+            android:label="@string/title_activity_property_issue_submit"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

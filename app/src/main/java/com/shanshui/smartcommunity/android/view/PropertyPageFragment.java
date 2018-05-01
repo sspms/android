@@ -15,6 +15,8 @@ import com.flyco.tablayout.widget.MsgView;
 import com.shanshui.smartcommunity.android.R;
 import com.shanshui.smartcommunity.android.model.Community;
 import com.shanshui.smartcommunity.android.model.PropertyIssue;
+import com.shanshui.smartcommunity.android.model.PropertyIssueComment;
+import com.shanshui.smartcommunity.android.model.User;
 import com.shanshui.smartcommunity.android.repository.DatabaseRepo;
 
 import java.util.ArrayList;
@@ -89,27 +91,31 @@ public class PropertyPageFragment extends PageFragment {
                 DatabaseRepo.newInstance(getContext()).communityDao().insert(community);
 
                 PropertyIssue[] issues = new PropertyIssue[32];
+                PropertyIssueComment[] comments = new PropertyIssueComment[10];
+                User user = new User(1L, "天气预报");
+                User user2 = new User(2L, "大风预警");
                 for (int i = 0; i < 8; i++) {
-                    PropertyIssue pi = new PropertyIssue(1L * (i + 1), 1L, 1L);
+                    PropertyIssue pi = new PropertyIssue("墙面渗水", 1L * (i + 1), 1L, user);
                     pi.setCategory("墙");
                     pi.setDescription("公司来电问，怎么回事？都三天了还不去弄（我这不是身体不舒服嘛，弄什么弄？你要快，你叫别人去）家里的龙眼熟了，回去摘些吃吃，宽带的事，明天再去……");
                     pi.setLocation("25栋201室");
                     pi.setStatus("验收");
                     pi.setType("PUBLIC");
                     pi.setOpenDate(new Date());
-                    PropertyIssue pii = new PropertyIssue(2L * (i + 1), 1L, 1L);
+
+                    PropertyIssue pii = new PropertyIssue("大门打不开", 2L * (i + 1), 1L, user);
                     pii.setCategory("门");
                     pii.setDescription("昨夜睡的晚了，起床已经9点了，起来抽烟，喝茶，吃早餐，又中午了。看看外面的太阳……唉！！宽带的事，还是明天再去吧！");
                     pii.setLocation("西大门");
                     pii.setStatus("维修");
                     pii.setOpenDate(new Date());
-                    PropertyIssue piii = new PropertyIssue(3L * (i + 1), 1L, 1L);
+                    PropertyIssue piii = new PropertyIssue("滑梯坏了", 3L * (i + 1), 1L, user);
                     piii.setCategory("游乐设施");
                     piii.setDescription("今天起来觉得身体不太对劲，有点累。有人拿两个主机来叫修修，唉……精神不好，你先放到墙角那里吧！宽带用户来电问，怎么还不来检查的？唉……身体不舒服，明天吧！");
                     piii.setLocation("地库");
                     piii.setStatus("确认");
                     piii.setOpenDate(new Date());
-                    PropertyIssue piiii = new PropertyIssue(4L * (i + 1), 1L, 2L);
+                    PropertyIssue piiii = new PropertyIssue("车位存水", 4L * (i + 1), 1L, user2);
                     piiii.setCategory("车位");
                     piiii.setDescription("昨夜喝了点酒，和一帮帅哥美女疯到半夜，今天起床晚了，头有点痛，休息一下，下午再去检查宽带，刚刚想去的，天又下雨了，唉……还是明天再去吧！");
                     piiii.setLocation("地库");
@@ -122,8 +128,11 @@ public class PropertyPageFragment extends PageFragment {
                     issues[4 * i + 3] = piiii;
                 }
                 DatabaseRepo.newInstance(getContext()).propertyIssueDao().insert(issues);
+                for(int i = 0 ; i < 10; i++){
+                    comments[i] = new PropertyIssueComment(1L, (i+1) * 1L, user, "昨夜喝了点酒，和一帮帅哥美女疯到半夜，今天起床晚了，头有点痛，休息一下，下午再去检查宽带，刚刚想去的，天又下雨了，唉……还是明天再去吧！", new Date());
+                }
+                DatabaseRepo.newInstance(getContext()).propertyIssueCommentDao().insert(comments);
                 PropertyIssue[] pis = DatabaseRepo.newInstance(getContext()).propertyIssueDao().findAll();
-
 
                 Log.i(TAG, "prepare data done, verifying...");
                 Log.i(TAG, String.valueOf(pis.length));

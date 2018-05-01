@@ -23,6 +23,7 @@ public class User implements Roomable {
 
     @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "user_id")
     private long id;
     @ColumnInfo(name = "profile_image_url")
     private String profileImageUrl;

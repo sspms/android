@@ -1,7 +1,7 @@
 package com.shanshui.smartcommunity.android;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -34,8 +34,10 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.shanshui.smartcommunity.android.adaptor.GridViewColorAdaptor;
 import com.shanshui.smartcommunity.android.util.ResourceHelper;
 import com.shanshui.smartcommunity.android.util.WindowHelper;
+import com.shanshui.smartcommunity.android.view.PropertyIssueSubmitActivity;
 import com.shanshui.smartcommunity.android.viewcard.CardItem;
 import com.shanshui.smartcommunity.android.viewcard.CardPagerAdapter;
 import com.shanshui.smartcommunity.android.viewcard.ShadowTransformer;
@@ -231,12 +233,24 @@ public class HomeFragment extends Fragment {
                     "报修", "建议", "车辆", "物业报告", "付费",
                     "邻里提醒", "投票", "闲聊", "二手", "掌上菜场"
             };
+            View.OnClickListener[] handlers = {
+                    new View.OnClickListener() {
 
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = PropertyIssueSubmitActivity.newIntent(getContext());
+                            getContext().startActivity(intent);
+                        }
+                    }
+            };
             funcEntryPageOneData = new ArrayList();
             for (int i = 0; i < icon.length; i++) {
                 Map<String, Object> map = new HashMap();
                 map.put("img", icon[i]);
                 map.put("text", name[i]);
+                if (0 == i) {
+                    map.put("event", handlers[i]);
+                }
                 funcEntryPageOneData.add(map);
             }
         }
