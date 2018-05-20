@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.shanshui.smartcommunity.android.adaptor.PagedListAdapterBase.ViewHolderBase;
 import com.shanshui.smartcommunity.android.model.Roomable;
+import com.shanshui.smartcommunity.android.util.CallbackFactory;
 import com.shanshui.smartcommunity.android.util.LogHelper;
 
 /**
@@ -20,17 +21,7 @@ import com.shanshui.smartcommunity.android.util.LogHelper;
 public abstract class PagedListAdapterBase<T extends Roomable, V extends ViewHolderBase<T>> extends PagedListAdapter<T, V> {
 
     protected PagedListAdapterBase() {
-        super(new DiffUtil.ItemCallback<T>() {
-            @Override
-            public boolean areItemsTheSame(@NonNull T oldItem, @NonNull T newItem) {
-                return oldItem.getId() == newItem.getId();
-            }
-
-            @Override
-            public boolean areContentsTheSame(@NonNull T oldItem, @NonNull T newItem) {
-                return oldItem.equals(newItem);
-            }
-        });
+        super(CallbackFactory.getItemDiffCallback());
     }
 
     @Override
@@ -45,7 +36,7 @@ public abstract class PagedListAdapterBase<T extends Roomable, V extends ViewHol
         if (instance != null) {
             // pass position here for handling recycler view header and footer, usually it's not useful
             holder.bindTo(instance, position);
-            postBinding(holder,instance, position);
+            postBinding(holder, instance, position);
         } else {
             // Null defines a placeholder item - PagedListAdapter will automatically invalidate
             // this row when the actual object is loaded from the database

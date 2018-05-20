@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,148 +7,155 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.shanshui.smartcommunity.android.view.PropertyIssueSubmitActivity"
     tools:showIn="@layout/activity_property_issue_submit">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="标题:"
-        android:theme="@style/PropertyIssueInputTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/title_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:hint="问题简短描述"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/title"
-        app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal">-->
-
-    <!---->
-    <!--</LinearLayout>-->
-    <TextView
-        android:id="@+id/type"
-        style="@style/PropertyIssueInputTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="公私:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_content" />
-
-    <RadioGroup
-        android:id="@+id/type_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintBottom_toBottomOf="@+id/type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/title_content"
-        app:layout_constraintLeft_toRightOf="@+id/type"
-        app:layout_constraintTop_toBottomOf="@+id/title_content"
-        app:layout_constraintTop_toTopOf="@+id/type">
-
-        <RadioButton
-            android:id="@+id/radioButton"
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:text="个人"
-            android:textColorLink="@color/bgTitleLeft"
-            android:textSize="16sp" />
+            android:text="标题:"
+            android:theme="@style/PropertyIssueInputTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/radioButton2"
+        <EditText
+            android:id="@+id/title_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="问题简短描述"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/title"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!---->
+        <!--</LinearLayout>-->
+        <TextView
+            android:id="@+id/type"
+            style="@style/PropertyIssueInputTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="公共"
-            android:textColorLink="@color/bgTitleLeft"
-            android:textSize="16sp" />
-    </RadioGroup>
+            android:text="公私:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_content" />
 
-    <TextView
-        android:id="@+id/title_category"
-        style="@style/PropertyIssueInputTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="类别:"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type_content" />
+        <RadioGroup
+            android:id="@+id/type_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintBottom_toBottomOf="@+id/type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/title_content"
+            app:layout_constraintLeft_toRightOf="@+id/type"
+            app:layout_constraintTop_toBottomOf="@+id/title_content"
+            app:layout_constraintTop_toTopOf="@+id/type">
 
-    <android.support.v7.widget.AppCompatSpinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/property_issue_category"
-        android:gravity="left"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/title_category"
-        app:layout_constraintLeft_toLeftOf="@+id/title_content"
-        app:layout_constraintLeft_toRightOf="@+id/title_category"
-        app:layout_constraintTop_toBottomOf="@+id/type_content">
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text="个人"
+                android:textColorLink="@color/bgTitleLeft"
+                android:theme="@style/PropertyIssueInputContent" />
 
-    </android.support.v7.widget.AppCompatSpinner>
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公共"
+                android:textColorLink="@color/bgTitleLeft"
+                android:theme="@style/PropertyIssueInputContent" />
+        </RadioGroup>
 
-    <TextView
-        android:id="@+id/location"
-        style="@style/PropertyIssueInputTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="地点:"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_category" />
+        <TextView
+            android:id="@+id/title_category"
+            style="@style/PropertyIssueInputTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类别:"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_content" />
 
-    <CheckBox
-        android:id="@+id/my_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我家"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/location"
-        app:layout_constraintLeft_toLeftOf="@+id/title_content" />
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/property_issue_category"
+            android:gravity="left"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/title_category"
+            app:layout_constraintLeft_toLeftOf="@+id/title_content"
+            app:layout_constraintLeft_toRightOf="@+id/title_category"
+            app:layout_constraintTop_toBottomOf="@+id/type_content">
 
-    <CheckBox
-        android:id="@+id/my_parking_slot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我的车位"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/location"
-        app:layout_constraintLeft_toRightOf="@+id/my_home" />
-    <CheckBox
-        android:id="@+id/my_building"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我所在楼"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/location"
-        app:layout_constraintLeft_toRightOf="@+id/my_parking_slot" />
+        </android.support.v7.widget.AppCompatSpinner>
 
-    <EditText
-        android:id="@+id/location_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="其他地方请手动输入"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/title_content"
-        app:layout_constraintLeft_toRightOf="@+id/location"
-        app:layout_constraintTop_toBottomOf="@+id/my_home" />
+        <TextView
+            android:id="@+id/location"
+            style="@style/PropertyIssueInputTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地点:"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_category" />
 
-    <!--<TextView-->
+        <CheckBox
+            android:id="@+id/my_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我家"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/location"
+            app:layout_constraintLeft_toLeftOf="@+id/title_content" />
+
+        <CheckBox
+            android:id="@+id/my_parking_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的车位"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/location"
+            app:layout_constraintLeft_toRightOf="@+id/my_home" />
+
+        <CheckBox
+            android:id="@+id/my_building"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我所在楼"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/location"
+            app:layout_constraintLeft_toRightOf="@+id/my_parking_slot" />
+
+        <EditText
+            android:id="@+id/location_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="其他地方请手动输入"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/title_content"
+            app:layout_constraintLeft_toRightOf="@+id/location"
+            app:layout_constraintTop_toBottomOf="@+id/my_home" />
+
+        <!--<TextView-->
         <!--android:id="@+id/location_content_myhome"-->
         <!--android:layout_width="0dp"-->
         <!--android:layout_height="wrap_content"-->
@@ -163,58 +170,59 @@
         <!--app:layout_constraintBottom_toBottomOf="@+id/location"-->
         <!--app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/PropertyIssueInputTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="描述:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_content" />
+        <TextView
+            android:id="@+id/description"
+            style="@style/PropertyIssueInputTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="描述:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_content" />
 
-    <EditText
-        android:id="@+id/description_content"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:gravity="left|center_horizontal"
-        android:hint="问题详细描述"
-        android:theme="@style/PropertyIssueInputContent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/title_content"
-        app:layout_constraintLeft_toRightOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@+id/location_content"
-        app:layout_constraintTop_toTopOf="@+id/description" />
+        <EditText
+            android:id="@+id/description_content"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:gravity="left|center_horizontal"
+            android:hint="问题详细描述"
+            android:theme="@style/PropertyIssueInputContent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/title_content"
+            app:layout_constraintLeft_toRightOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/location_content"
+            app:layout_constraintTop_toTopOf="@+id/description" />
 
-    <TextView
-        android:id="@+id/picture"
-        style="@style/PropertyIssueInputTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="照片:"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_content" />
+        <TextView
+            android:id="@+id/picture"
+            style="@style/PropertyIssueInputTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="照片:"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/picture_list"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/title_content"
-        app:layout_constraintLeft_toRightOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@+id/description_content"
-        app:layout_constraintTop_toTopOf="@+id/picture">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/picture_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/title_content"
+            app:layout_constraintLeft_toRightOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/description_content"
+            app:layout_constraintTop_toTopOf="@+id/picture">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bgTitleLeft"
-        android:text="提交"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picture_list" />
-
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/bgTitleLeft"
+            android:text="提交"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/picture_list" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
